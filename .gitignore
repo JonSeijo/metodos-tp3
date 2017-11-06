@@ -1,3 +1,6 @@
+# No push de datasets!
+datasets/
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
