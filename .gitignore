@@ -1,5 +1,7 @@
 # No push de datasets!
 data/
+clase/
+pruebas/
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
