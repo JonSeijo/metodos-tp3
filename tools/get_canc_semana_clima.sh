@@ -11,7 +11,7 @@
 # ECP: Panama city
 
 
-outfile="cancelaciones_semana_clima.csv"
+outfile="delay_clima_origen_miami.csv"
 echo "year,mes,semana,valor" > $outfile
 
 # Hay datos de cancelaciones por clima solo desde 2003, antes los datos son 0
@@ -21,19 +21,37 @@ for year in `seq 2003 2008`; do
 
 	# SOLO DESCOMENTAR UNO
 
-	# con WeatherDelay
-	# awk -F, '!($26=="0") && !($26=="NA")' $infile > canc_aux.csv
+	# con WeatherDelay origen miami
+	awk -F, '$17=="MIA" && !($26+0<15) && !($26=="NA")' $infile > canc_aux.csv
 
 	# cancelados
 	# awk -F, '$22=="1"' $infile > canc_aux.csv
 
+	# cancelados destino miami
+	# awk -F, '$18=="MIA" && $22=="1"' $infile > canc_aux.csv
+
+	# cancelados origen miami
+	# awk -F, '$17=="MIA" && $22=="1"' $infile > canc_aux.csv
+
+	# cancelados por clima destino miami
+	# awk -F, '$18=="MIA" && $22=="1" && $23=="B"' $infile > canc_aux.csv
+
+	# cancelados por clima origen miami
+	# awk -F, '$17=="MIA" && $22=="1" && $23=="B"' $infile > canc_aux.csv
+
+	# cancelados destino atlanta
+	# awk -F, '$18=="ATL" && $22=="1"' $infile > canc_aux.csv
+
+	# cancelados por clima destino atlanta
+	# awk -F, '$18=="ATL" && $22=="1" && $23=="B"' $infile > canc_aux.csv
+
+
 	# cancelados por clima
-	awk -F, '$22=="1" && $23=="B"' $infile > canc_aux.csv
+	# awk -F, '$22=="1" && $23=="B"' $infile > canc_aux.csv
 
 	# cancelados por clima hacia destino X ($18 == .. ), pueden agregarse mas destinos
 	# awk -F, '($18=="MSY" || $18=="MIA" || $18=="MCO") && $22=="1" && $23=="B"' $infile > canc_aux.csv
-
-
+	# awk -F, '($18=="MIA") && $22=="1" && $23=="B"' $infile > canc_aux.csv
 
 	# Guardo valores semana a semana,
 	for mes in `seq 1 12`; do

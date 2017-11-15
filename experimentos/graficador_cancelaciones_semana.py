@@ -19,9 +19,9 @@ violeta = '#591463'
 # Levanto los datos
 
 # https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html
-df_delay_clima = pd.read_csv('delays_mes_clima.csv')
-df_cancelaciones_clima_semana = pd.read_csv('cancelaciones_semana_clima.csv')
-df_cancelaciones_clima = pd.read_csv('cancelaciones_mes_clima-2000-2008.csv')
+df_delay_clima = pd.read_csv('datos/delays_mes_clima.csv')
+df_cancelaciones_clima_semana = pd.read_csv('datos/cancelaciones_semana_clima.csv')
+df_cancelaciones_clima = pd.read_csv('datos/cancelaciones_mes_clima-2000-2008.csv')
 
 df_cancelaciones_clima_semana['valor']
 
