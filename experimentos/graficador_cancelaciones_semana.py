@@ -72,19 +72,15 @@ def entrenar_y_predecir_en_rangos(df, rango_entrenamiento, rango_prediccion):
     # http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
     regr = linear_model.LinearRegression(fit_intercept=False)
 
-    ## Entreno el modelo
-
     # Armo la matriz A de features
     df_entrenamiento = df[df['x'].isin(rango_entrenamiento)]
 
     A = armar_matriz_A(df_entrenamiento['x'])
-
     # 'Fiteo' los datos de entrenamiento
     regr.fit(A, df_entrenamiento['y'])
 
-    df_entrenamiento['pred'] = regr.predict(A)
-
     ## Realizo predicciones
+    df_entrenamiento['pred'] = regr.predict(A)
 
     # Armo la matriz A de features
     df_prediccion = df[df['x'].isin(rango_prediccion)]
@@ -148,5 +144,5 @@ ax.legend(["Datos", "Aproximación", "Prediccion"])
 
 print("ECM: " + str(calcularECM(df_prediccion)))
 
-plt.xlim((0,get_year(6) + 5))
+plt.xlim((0, get_year(6) + 5))
 plt.show()
