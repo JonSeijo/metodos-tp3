@@ -154,19 +154,36 @@ def predecir_cancelaciones(df, k):
     # Entreno 3 years hacia atras
     rango_entrenamiento = list(range(restar_year(k, 3), k+1))
     # Entreno 1 years hacia delante
-    rango_prediccion = list(range(k, sumar_year(k, 1) + 1))
+    rango_prediccion = list(range(k, sumar_year(k, 3) + 1))
 
     return entrenar_y_predecir_en_rangos(df, rango_entrenamiento, rango_prediccion)
+
+
+"""
+Para df_cancelaciones_general_origen_atlanta
+
+ECM: 11841.8727878
+1,
+t,
+np.sin(np.pi/(12.0*4.0)*t),
+np.cos(np.pi/(12.0*4.0)*t),
+np.sin(np.pi/(6.0*4.0) * t),
+np.cos(np.pi/(6.0*4.0) * t),
+np.sin(np.pi/(3.0*4.0) * t),
+np.cos(np.pi/(3.0*4.0) * t),
+"""
 
 
 def armar_matriz_A(s):
     return np.array([
         [
             1,
-            np.sin(0.7*t),
-            np.cos(0.7*t),
-            np.sin(0.08 * t),
-            np.cos(0.08 * t),
+            np.sin(np.pi/(12.0*4.0)*t),
+            np.cos(np.pi/(12.0*4.0)*t),
+            np.sin(np.pi/(6.0*4.0) * t),
+            np.cos(np.pi/(6.0*4.0) * t),
+            np.sin(np.pi/(3.0*4.0) * t),
+            np.cos(np.pi/(3.0*4.0) * t),
         ] for t in s])
 
 
@@ -174,7 +191,7 @@ def armar_matriz_A(s):
 def cuadrados_minimos(df, ylabel='Cancelaciones por semana'):
     ax = preplot_cuadminimos(df, ylabel=ylabel, color=azul)
     # Predigo a partir del year 5
-    df_entrenamiento, df_prediccion = predecir_cancelaciones(df, get_year(5))
+    df_entrenamiento, df_prediccion = predecir_cancelaciones(df, get_year(3))
 
     # Grafico predicciones y aproximacino
     sns.tsplot(ax=ax, time=df_entrenamiento['x'], data=df_entrenamiento['pred'], color='red', legend=True)
