@@ -31,6 +31,7 @@ df_cancelaciones_orig_miami = pd.read_csv('datos/cancelados_origen_miami.csv')
 df_cancelaciones_clima_orig_miami = pd.read_csv('datos/cancelados_clima_origen_miami.csv')
 
 df_delay_clima_orig_miami = pd.read_csv('datos/delay_clima_origen_miami.csv')
+df_minutos_delay_clima_orig_miami = pd.read_csv('datos/minutos_delay_clima_origen_miami.csv')
 
 df_cancelaciones_clima_semana = pd.read_csv('datos/cancelaciones_semana_clima.csv')
 df_cancelaciones_clima = pd.read_csv('datos/cancelaciones_mes_clima-2000-2008.csv')
@@ -61,6 +62,23 @@ def plot_delay_cancelaciones_miami():
 
 
 
+# DELAYS MINUTOS CLIMA MIAMI
+def plot_delay_clima_minutos_miami():
+    espaciado = 24
+    enum = [x for x in range(12*6*4 + 1)]
+    labels = [str(year) + " - " + str(mes) for year in range(2003, 2009) for mes in listar_meses() for semana in range(4)]
+
+    ax = df_minutos_delay_clima_orig_miami['valor'].plot(title='Miami - Delays por clima en minutos', linestyle='--', marker='o')
+
+    ax.set_xlabel('Semana')
+    ax.set_ylabel('Minutos de delay por clima')
+
+    ax.set_xticks(enum[::espaciado])
+    ax.set_xticklabels(labels[::espaciado], rotation=45)
+
+    ax.legend(['Delay Miami - Clima'])
+
+    plt.show()
 
 
 
@@ -70,5 +88,5 @@ def plot_delay_cancelaciones_miami():
 
 
 
-
-plot_delay_cancelaciones_miami()
+# plot_delay_cancelaciones_miami()
+plot_delay_clima_minutos_miami()
