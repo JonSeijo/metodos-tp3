@@ -19,8 +19,9 @@ violeta = '#591463'
 
 # https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html
 df_delay_clima = pd.read_csv('datos/delays_mes_clima.csv')
-df_cancelaciones_clima = pd.read_csv('datos/cancelaciones_mes_clima-2000-2008.csv')
-
+#df_cancelaciones_clima = pd.read_csv('datos/cancelaciones_mes_clima-2000-2008.csv')
+#df_cancelaciones_clima = pd.read_csv('datos/canc_por_mes-origen-Orlando-2003-2008.csv')
+df_cancelaciones_clima = pd.read_csv('datos/canc_por_mes-origen-Detroit-2003-2008.csv')
 
 def plotear_cancelaciones(color_in=violeta):
     rango_completo = pd.DatetimeIndex(start='2003-01-01',end='2009-01-01' , freq='M')
@@ -30,7 +31,7 @@ def plotear_cancelaciones(color_in=violeta):
     df_cancelaciones_clima['Meses'] = range(len(rango_completo))
     df_cancelaciones_clima['y'] = df_cancelaciones_clima['valor']
 
-    ax = df_cancelaciones_clima['y'].plot(x=serie, title='Cancelaciones por clima desde 2003', linestyle='--', marker='o', color=color_in)
+    ax = df_cancelaciones_clima['y'].plot(x=serie, title='Cancelaciones por clima desde 2003 Detroit', linestyle='--', marker='o', color=color_in)
     ax.set_xlabel('Fecha')
     ax.set_ylabel('Cantidad de cancelaciones')
 
@@ -42,15 +43,24 @@ def armar_matriz_A(s):
         [
             1,
             t,
-            np.cos(t),
-            np.sin(t),
-            300*np.cos(t),
-            300*np.sin(t),
-            np.cos(np.pi *t),
-            np.sin(np.pi *t),
-            300*np.cos(np.pi/2.0 *t),
-            300*np.sin(np.pi/2.0 *t),
-            np.e
+            t**2,
+            abs((np.cos(np.pi/12.0 *(t)))**600),
+            abs((np.sin(np.pi/12.0 *(t)))**600),
+            #np.cos(t),
+            #np.sin(t),
+            #300*np.cos(t),
+            #300*np.sin(t),
+            #np.cos(np.pi *t),
+            #np.sin(np.pi *t),
+            np.cos(np.pi/12.0 *t)**50,
+            np.sin(np.pi/12.0 *t)**50,
+            #abs((np.cos(np.pi/12.0 *(t-3)))**4),
+            #abs((np.sin(np.pi/12.0 *(t-3)))**4),
+            #abs((np.cos(np.pi/6.0 *(t-3)))**4),
+            #abs((np.sin(np.pi/6.0 *(t-3))))**4,
+            #np.e**(-(((t-20)*4)**2))
+            np.sin(t)*np.cos(t),
+            #np.e
 
         ] for t in s])
 
@@ -90,7 +100,7 @@ def calcularECM(df_prediccion):
 
 def predecir_cancelaciones(k):
     rango_entrenamiento = list(range(k-12*4,k+1))
-    rango_prediccion_nogranular = list(range(k,k+12*2 + 1))
+    rango_prediccion_nogranular = list(range(k,k+12*1 + 1))
 
     # 3 veces mayor granularidad, NO FUNCA
     # print("ESTOY CAMBIANDO LA GRANULARIDAD OJO CON EL CALCULO DEL ERROR CUADRATICO MEDIO")
@@ -101,7 +111,7 @@ def predecir_cancelaciones(k):
 
 ax = plotear_cancelaciones(azul)
 
-df_entrenamiento, df_prediccion = predecir_cancelaciones(12*4 + 6)
+df_entrenamiento, df_prediccion = predecir_cancelaciones(12*3)
 
 # Grafico predicciones y aproximacino
 sns.tsplot(ax=ax, time=df_entrenamiento['Meses'], data=df_entrenamiento['pred'], color='red', legend=True)
@@ -109,6 +119,7 @@ sns.tsplot(ax=ax, time=df_prediccion['Meses'], data=df_prediccion['pred'], color
 
 ax.legend(["Datos", "Aproximación", "Prediccion"])
 
+print("ECM: " + str(calcularECM(df_prediccion)))
 
 plt.xlim((-5,12*6 + 5))
 plt.show()

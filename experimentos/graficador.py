@@ -43,6 +43,12 @@ df_minutos_delay_clima_orig_miami = pd.read_csv('datos/minutos_delay_clima_orige
 df_cancelaciones_clima_semana = pd.read_csv('datos/cancelaciones_semana_clima.csv')
 df_cancelaciones_clima = pd.read_csv('datos/cancelaciones_mes_clima-2000-2008.csv')
 
+df_cancelaciones_origen_orlando = pd.read_csv('datos/cancelados_gral_origen_orlando.csv')
+
+df_cancelaciones_origen_orlando_sin_outliers = pd.read_csv('datos/orlando_cancel_sin_outliers.csv')
+df_cancelaciones_origen_miami_sin_outliers = pd.read_csv('datos/miami_cancel_sin_outliers.csv')
+
+df_cancelaciones_origen_detroit = pd.read_csv('datos/cancelados_semana_origen_detroit.csv')
 
 espaciado = 24
 rotacion_xaxis = 50
@@ -63,6 +69,20 @@ def plot_delay_cancelaciones_miami():
     ax = df_delay_clima_orig_miami['valor'].plot(title='Miami - Delays vs Cancelaciones - Clima', linestyle='--', marker='o')
     df_cancelaciones_clima_orig_miami['valor'].plot(ax=ax, linestyle='--', marker='o')
     ajustar_ax(ax, legend=['Delay Miami - Clima', 'Cancelaciones Miami - Clima'])
+    plt.show()
+
+#Miami vs Orlando
+def plot_miami_vs_orlando_cancelaciones_origen():
+    ax = df_cancelaciones_origen_orlando['valor'].plot(title='Miami vs. Orlando, cancelaciones por clima', linestyle='--', marker='o')
+    df_cancelaciones_clima_orig_miami['valor'].plot(ax=ax, linestyle='--', marker='o')
+    ajustar_ax(ax, legend=['Cancelaciones Orlando - Clima', 'Cancelaciones Miami - Clima'])
+    plt.show()
+
+#Miami vs Orlando no outliers
+def plot_miami_vs_orlando_cancelaciones_origen():
+    ax = df_cancelaciones_origen_orlando_sin_outliers['valor'].plot(title='Miami vs. Orlando, cancelaciones por clima (sin outliers)', linestyle='--', marker='o')
+    df_cancelaciones_origen_miami_sin_outliers['valor'].plot(ax=ax, linestyle='--', marker='o')
+    ajustar_ax(ax, legend=['Cancelaciones Orlando - Clima', 'Cancelaciones Miami - Clima'])
     plt.show()
 
 
@@ -96,6 +116,11 @@ def plot_cancelados_gral_origen_atlanta():
     ajustar_ax(ax, ylabel='Cantidad de cancelaciones', legend=['Cancelaciones por semana'])
     plt.show()
 
+# Cancelaciones general - origen Orlando
+def plot_cancelados_gral_origen_orlando():
+    ax = df_cancelaciones_origen_orlando['valor'].plot(title='Cancelaciones - Aeropuerto de Orlando', linestyle='--', marker='o')
+    ajustar_ax(ax, ylabel='Cantidad de cancelaciones', legend=['Cancelaciones Orlando - Clima'])
+    plt.show()
 
 # -----------------------------------------------------
 # CUADRADOS MINIMOS
@@ -103,7 +128,7 @@ def plot_cancelados_gral_origen_atlanta():
 def preplot_cuadminimos(df, ylabel='Cancelaciones por semana', color=azul):
     df['y'] = df['valor']
     df['x'] = range(len(labels))
-    ax = df['valor'].plot(title='Cancelaciones por clima', linestyle='--', marker='o', color=color)
+    ax = df['valor'].plot(title='Cancelaciones por clima Detroit', linestyle='--', marker='o', color=color)
     ajustar_ax(ax, xlabel='Semana', ylabel=ylabel)
     return ax
 
@@ -152,9 +177,9 @@ def get_year(year):
 
 def predecir_cancelaciones(df, k):
     # Entreno 3 years hacia atras
-    rango_entrenamiento = list(range(restar_year(k, 3), k+1))
+    rango_entrenamiento = list(range(restar_year(k, 2), k+1))
     # Entreno 1 years hacia delante
-    rango_prediccion = list(range(k, sumar_year(k, 3) + 1))
+    rango_prediccion = list(range(k, sumar_year(k, 1) + 1))
 
     return entrenar_y_predecir_en_rangos(df, rango_entrenamiento, rango_prediccion)
 
@@ -178,12 +203,39 @@ def armar_matriz_A(s):
     return np.array([
         [
             1,
-            np.sin(np.pi/(12.0*4.0)*t),
-            np.cos(np.pi/(12.0*4.0)*t),
-            np.sin(np.pi/(6.0*4.0) * t),
-            np.cos(np.pi/(6.0*4.0) * t),
-            np.sin(np.pi/(3.0*4.0) * t),
-            np.cos(np.pi/(3.0*4.0) * t),
+            #np.sin(np.pi/(3.0*4.0)*t),
+            #np.sin(np.pi/(3.0*4.0)*t)
+            #np.sin(t)
+            #np.sin(np.pi/(12.0*4.0)*t),
+            #np.cos(np.pi/(12.0*4.0)*t),
+            #np.sin(np.pi/(6.0*4.0) * t),
+            #np.cos(np.pi/(6.0*4.0) * t),
+            #np.sin(np.pi/(3.0*4.0) * t),
+            #np.cos(np.pi/(3.0*4.0) * t),
+
+
+
+
+            t,
+            t**2,
+            abs((np.cos(np.pi/(12.0*4) *(t-4*6)))**100),
+            abs((np.sin(np.pi/(12.0*4) *(t-4*6)))**100),
+            #np.cos(t),
+            #np.sin(t),
+            #300*np.cos(t),
+            #300*np.sin(t),
+            #np.cos(np.pi *t),
+            #np.sin(np.pi *t),
+            np.cos(np.pi/12.0 *t)**50,
+            np.sin(np.pi/12.0 *t)**50,
+            #abs((np.cos(np.pi/12.0 *(t-3)))**4),
+            #abs((np.sin(np.pi/12.0 *(t-3)))**4),
+            #abs((np.cos(np.pi/6.0 *(t-3)))**4),
+            #abs((np.sin(np.pi/6.0 *(t-3))))**4,
+            np.e**(-(((t-3)*4)**2)),
+            np.sin(t)*np.cos(t),
+            #np.e
+            
         ] for t in s])
 
 
@@ -211,5 +263,11 @@ def cuadrados_minimos(df, ylabel='Cancelaciones por semana'):
 # plot_cancelados_gral()
 # plot_cancelados_gral_dest_atlanta()
 # plot_cancelados_gral_origen_atlanta()
+# plot_cancelados_gral_origen_orlando()
+# plot_miami_vs_orlando_cancelaciones_origen()
+# plot_miami_vs_orlando_cancelaciones_origen()
 
-cuadrados_minimos(df_cancelaciones_general_origen_atlanta)
+# cuadrados_minimos(df_cancelaciones_general_origen_atlanta)
+# cuadrados_minimos(df_cancelaciones_origen_orlando)
+# cuadrados_minimos(df_cancelaciones_origen_orlando_sin_outliers)
+cuadrados_minimos(df_cancelaciones_origen_detroit)
