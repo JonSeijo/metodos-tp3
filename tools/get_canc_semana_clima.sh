@@ -11,7 +11,7 @@
 # ECP: Panama city
 
 
-outfile="cancelados_semana_general_origen_atlanta.csv"
+outfile="cancelados_semana_origen_detroit.csv"
 echo "year,mes,semana,valor" > $outfile
 
 # Hay datos de cancelaciones por clima solo desde 2003, antes los datos son 0
@@ -34,7 +34,13 @@ for year in `seq 2003 2008`; do
 	# awk -F, '$17=="MIA" && $22=="1"' $infile > canc_aux.csv
 
 	# cancelados origen atlanta
-	awk -F, '$17=="ATL" && $22=="1"' $infile > canc_aux.csv
+	# awk -F, '$17=="ATL" && $22=="1"' $infile > canc_aux.csv
+
+	# cancelados origen orlando
+	#awk -F, '$17=="MCO" && $22=="1"' $infile > canc_aux.csv
+
+	# cancelados origen detroit
+	awk -F, '$17=="DTW" && $22=="1"' $infile > canc_aux.csv
 
 	# cancelados por clima destino miami
 	# awk -F, '$18=="MIA" && $22=="1" && $23=="B"' $infile > canc_aux.csv
@@ -83,4 +89,7 @@ for year in `seq 2003 2008`; do
 
 	# rm canc_aux.csv
 
+
 done;
+
+mv "cancelados_semana_origen_detroit.csv" "../experimentos/datos/cancelados_semana_origen_detroit.csv"
