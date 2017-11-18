@@ -58,7 +58,35 @@ Los períodos elegidos se corresponden con la cantidad de semanas. Por ejemplo, 
 % ECM: 1130960.72329
 % ECM: 1991041.60249
 % ECM: 671208.89326
-Con esta familia de funciones obtuvimos (promediando con Cross Validation) un ECM de 1264403.
+Con esta familia de funciones obtuvimos (promediando con Cross Validation) un ECM de 1264403. Las cancelaciones por clima en general no fueron sencillas de predecir, y no obtuvimos resultados muy buenos. Diferentes aeropuertos podrían estar sumando cancelaciones en períodos diferentes, es por esto que en el siguiente experimento consideraremos dos aeropuertos particulares: los aeropuertos de Miami y Los Ángeles. La razón de la elección es porque ambos se encuentran en costas opuestas del país, y porque Miami suele sufrir cancelaciones por mal clima sobre todo en época de huracanes (Agosto). \\
 
-Las cancelaciones por clima en general no fueron sencillas de predecir, y no obtuvimos resultados muy buenos. Es por esto que en el siguiente experimento consideraremos dos aeropuertos particulares, los aeropuertos de \todo{ver} ¿¿¿¿¿¿miami y atlanta???? \\
+Una aclaración importante: en los datos de Miami quitamos dos valores outliers que representaban mas de 450 cancelaciones esa semana pues distorsionaban el gráfico completamente. Creemos que correspondían al huracán Charley y Katrina. De todos modos, sus respectivos picos en esas fechas se siguieron manteniendo. \\
 
+Para ambos aeropuertos consideraremos la misma familia de funciones que en el experimento anterior, y realizamos Cross Validation para medir los errores. Para Miami obtubimos un ECM de 227. Con Los Ángeles, el ECM fue de 180. Los resultados fueron órdenes de magnitud mejores que cuando consideramos los aeropuertos combinados.
+
+% @Jonno - Miami
+% ECM: 442.585074873
+% ECM: 194.785193426
+% ECM: 45.2682310293
+
+% @Jonno - Los Angeles
+% ECM: 169.919233204
+% ECM: 254.398202871
+% ECM: 119.879984961
+
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=1.1\linewidth]{informe/imagenes/cancelacionesClimaMiamiPrediccionV1.pdf}
+  \captionof{figure}{Clima - Miami}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+    \includegraphics[width=1.1\linewidth]{informe/imagenes/cancelacionesClimaLosAngelesPrediccionV1.pdf}
+    \captionof{figure}{Clima - Los Ángeles}
+\end{minipage}
+\end{figure}
+
+En conclusión, \todo[inline]{se concluye algo}
