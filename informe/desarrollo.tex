@@ -7,14 +7,31 @@ blabalba
 
 Los ejes de estudio en los que nos centraremos son:
 \begin{itemize}
-    \item ¿Cómo varían las cancelaciones a través de los años?
-    \item ¿Cómo se relaciona el clima con las cancelaciones y delays?
+    \item ¿Cómo varían las cancelaciones y retrasos por clima a través del tiempo? ¿Cómo influye el aeropuerto de origen?
+    \item ¿Cómo se comporta nuestro modelo de cuadrados mínimos con diferentes aerolineas? ¿Podemos predecir alguna mejor que otra?
 \end{itemize}
 
-En el primer eje trataremos de encontrar un patrón a las cancelaciones en general, por ejemplo, ¿Se sigue un patrón regular?, ¿Hay fechas en las cuáles siempre hay cancelaciones? \\
+\todo[inline]{REVISAR SI ES QUE REALMENTE HICIMOS ESTO QUE DICE}
 
-\todo[inline]{Cambiar si no terminamos haciendo esto}
-En el segundo eje analizaremos qué sucede con los vuelos en aeropuertos que se encuentran en zonas de huracanes. Veremos si este tipo de fenómenos inesperados son significativos con respecto al resto de las cancelaciones, e intentaremos buscar una familia de funciones que nos ayude a predecir teniendo en cuenta estas eventualidades. \\
+En el primer eje trataremos de encontrar un patrón a las cancelaciones por clima a través del tiempo. ¿Se sigue un patrón regular?, ¿Hay fechas en las cuáles siempre hay cancelaciones? Veremos además que sucede con los retrasos en algunos aeropuertos particulares. \\
+
+En el segundo eje analizaremos las aerolíneas. Nos centraremos en algunas más representativas y veremos las regularidades (o irregularidades) que poseen. ¿Hay alguna más dificil de predecir que otras? ¿Cómo se comporta una misma familia de funciones de cuadrados mínimos con distintas aerolineas? ¿Será necesario adaptarlo cada vez? \\
 
 \section{Desarrollo}
+
+
+
+\section{Cancelaciones por clima}
+
+\subsection{Preliminares}
+
+En esta sección veremos cómo varían las cancelaciones por clima a través del tiempo, y veremos si podemos encontrar algún patrón. Nos será muy util contar con los motivos de las cancelaciones para poder diferenciar las que nos interesa, pero sin embargo, los datos previos a 2003 no cuentan con esta información. Es por eso que tomaremos los datos desde 2003 en adelante. \\
+
+Con respecto a los gráficos que mostraremos, en un principio agrupamos los datos por mes pero con ello perdíamos información: hay valores que varían semana a semana dentro de un mismo mes. Por ello decidimos agrupar nuestros datos por semanas. \\
+
+Sobre los retrasos, consideraremos que un vuelo tiene retraso cuando su tiempo de demora es superior a los 15 minutos. Esto se corresponde con la métrica de \textit{On Time Performance} (OTP) propuesta en el enunciado del trabajo. \\
+
+\subsection{Experimentación}
+
+
 
