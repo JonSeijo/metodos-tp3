@@ -14,8 +14,6 @@ En el segundo eje analizaremos las aerolíneas. Nos centraremos en algunas más 
 
 \section{Desarrollo}
 
-
-
 \section{Cancelaciones por clima}
 
 \subsection{Preliminares}
@@ -40,20 +38,27 @@ Analicemos un poco los datos. El comienzo de 2003 se ve completamente en cero, e
 
 En enero y diciembre (invierno de USA) siempre se observan mayor cantidad de cancelaciones. Consideramos que esto puede deberse a dos motivos: Tormentas de nieve y mal clima en general, y el aumento del caudal de gente que viaja en épocas festivas. \\
 
+En general, en agosto y septiembre se registran gran cantidad de cancelaciones, pero no es así todos los años. Por ejemplo, en 2007 no hay tanta cantidad como en 2004. Creemos que tiene que ver con las temporadas de huracanes, que no todos los años son catastróficas. Con respecto a nuestros datos, en agosto de 2004 el pico puede deberse al huracán Charley \cite{HuracanCharley}, mientras que agosto de 2005 se corresponde con el huracán Katrina \cite{HuracanKatrina}. \\
 
+% @Jonno:  Esto se puede quitar, nomas me parecio piola como comentario
+Como curiosidad, en agosto de 2003 se encuentra un pico aislado de los demás. Coincide con un apagón en grandes ciudades (Por ej, Nueva York) que duró 24hs en el cuál se reportaron cancelaciones de vuelos. Si bien uno creería que no tiene por qué estar relacionado al clima, el apagón se produjo por una caída del servicio central por las grandes demandas debido a las temperaturas inusuales de hasta 40 grados. \cite{ApagonNewYork}
 
+\subsection{Predicciones}
 
-% @Jonno:  Se puede quitar, me parecio piola como comentario de que averiguamos cosas.
-Como curiosidad, en agosto de 2003 se encuentra un pico aislado de los demás. Coincide con un apagón en grandes ciudades (Por ej, Nueva York) que duró 24hs en el cuál se reportaron cancelaciones de vuelos. Si bien uno creería que no tiene por qué estar relacionado al clima, el apagón se produjo por una caída del servicio central por las grandes demandas debido a las temperaturas inusuales de hasta 40 grados. \cite{ApagonNewYork}\\
+Para la predicción con cuadrados mínimos, la mejor familia de funciones que encontramos fue la siguiente:
+$$ f(t) = a + b * cos(\frac{\pi}{48} t)^{8} + c * sen(\frac{\pi}{24} t) + d * sen(\frac{\pi}{12} t) $$
+Los períodos elegidos se corresponden con la cantidad de semanas. Por ejemplo, como sabemos que hay picos pronunciados en enero, tomamos $cos(\frac{\pi}{48} t)$ para que alcance un máximo cada 48 semanas. (En nuestros datos, cada mes está dividido en 4 semanas). La potencia a la cuál esta elevada fue elegida para que estos picos sean pronunciados en esas fechas. Análogamente con los períodos de los senos, queremos que se tengan en cuenta los ciclos de seis meses y tres meses respectivamente. \\
 
+{\centering
+    \includegraphics[scale=0.8]{informe/imagenes/cancelacionesPorClimaGeneralPrediccionV1.pdf} \\
+    \captionof{figure}{Cancelaciones por clima, 3 años de entrenamiento y 2 de predicción.\\}
+}
 
-% Pico aislado en Agosto de 2003
-% http://www.elmundo.es/elmundo/2003/08/14/internacional/1060893592.html
+% @Jonno, con periodos de 2 años de train y 1 de prediccion:
+% ECM: 1130960.72329
+% ECM: 1991041.60249
+% ECM: 671208.89326
+Con esta familia de funciones obtuvimos (promediando con Cross Validation) un ECM de 1264403.
 
-% Agosto 2004: Charley
-% https://es.wikipedia.org/wiki/Hurac%C3%A1n_Charley_(2004)
-
-% Agosto 2005: Katrina
-% https://es.wikipedia.org/wiki/Hurac%C3%A1n_Katrina
-
+Las cancelaciones por clima en general no fueron sencillas de predecir, y no obtuvimos resultados muy buenos. Es por esto que en el siguiente experimento consideraremos dos aeropuertos particulares, los aeropuertos de \todo{ver} ¿¿¿¿¿¿miami y atlanta???? \\
 
