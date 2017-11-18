@@ -93,3 +93,5 @@ for year in `seq 2003 2008`; do
 done;
 
 mv "cancelados_semana_origen_detroit.csv" "../experimentos/datos/cancelados_semana_origen_detroit.csv"
+
+rm canc_aux.csv
