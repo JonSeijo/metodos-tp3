@@ -2,7 +2,7 @@
 
 Los ejes de estudio en los que nos centraremos son:
 \begin{itemize}
-    \item ¿Cómo varían las cancelaciones y retrasos por clima a través del tiempo? ¿Cómo influye el aeropuerto de origen?
+    \item ¿Cómo varían las cancelaciones por clima a través del tiempo? ¿Cómo influye el aeropuerto de origen?
     \item ¿Cómo se comporta nuestro modelo de cuadrados mínimos con diferentes aerolineas? ¿Podemos predecir alguna mejor que otra?
 \end{itemize}
 
@@ -11,8 +11,6 @@ Los ejes de estudio en los que nos centraremos son:
 En el primer eje trataremos de encontrar un patrón a las cancelaciones por clima a través del tiempo. ¿Se sigue un patrón regular?, ¿Hay fechas en las cuáles siempre hay cancelaciones? Veremos además que sucede con los retrasos en algunos aeropuertos particulares. \\
 
 En el segundo eje analizaremos las aerolíneas. Nos centraremos en algunas más representativas y veremos las regularidades (o irregularidades) que poseen. ¿Hay alguna más dificil de predecir que otras? ¿Cómo se comporta una misma familia de funciones de cuadrados mínimos con distintas aerolineas? ¿Será necesario adaptarlo cada vez? \\
-
-\section{Desarrollo}
 
 \section{Cancelaciones por clima}
 
@@ -41,12 +39,15 @@ En enero y diciembre (invierno de USA) siempre se observan mayor cantidad de can
 En general, en agosto y septiembre se registran gran cantidad de cancelaciones, pero no es así todos los años. Por ejemplo, en 2007 no hay tanta cantidad como en 2004. Creemos que tiene que ver con las temporadas de huracanes, que no todos los años son catastróficas. Con respecto a nuestros datos, en agosto de 2004 el pico puede deberse al huracán Charley \cite{HuracanCharley}, mientras que agosto de 2005 se corresponde con el huracán Katrina \cite{HuracanKatrina}. \\
 
 % @Jonno:  Esto se puede quitar, nomas me parecio piola como comentario
-Como curiosidad, en agosto de 2003 se encuentra un pico aislado de los demás. Coincide con un apagón en grandes ciudades (Por ej, Nueva York) que duró 24hs en el cuál se reportaron cancelaciones de vuelos. Si bien uno creería que no tiene por qué estar relacionado al clima, el apagón se produjo por una caída del servicio central por las grandes demandas debido a las temperaturas inusuales de hasta 40 grados. \cite{ApagonNewYork}
-
-\subsection{Predicciones}
+Como curiosidad, en agosto de 2003 se encuentra un pico aislado de los demás. Coincide con un apagón en grandes ciudades (Por ej, Nueva York) que duró 24hs en el cuál se reportaron cancelaciones de vuelos. Si bien uno creería que no tiene por qué estar relacionado al clima, el apagón se produjo por una caída del servicio central por las grandes demandas debido a las temperaturas inusuales de hasta 40 grados. \cite{ApagonNewYork} \\
+% \subsection{Predicciones}
 
 Para la predicción con cuadrados mínimos, la mejor familia de funciones que encontramos fue la siguiente:
-$$ f(t) = a + b * cos(\frac{\pi}{48} t)^{8} + c * sen(\frac{\pi}{24} t) + d * sen(\frac{\pi}{12} t) $$
+
+\begin{align}
+f(t) &= a + b * cos(\frac{\pi}{48} t)^{8} + c * sen(\frac{\pi}{24} t) + d * sen(\frac{\pi}{12} t)
+\end{align}
+
 Los períodos elegidos se corresponden con la cantidad de semanas. Por ejemplo, como sabemos que hay picos pronunciados en enero, tomamos $cos(\frac{\pi}{48} t)$ para que alcance un máximo cada 48 semanas. (En nuestros datos, cada mes está dividido en 4 semanas). La potencia a la cuál esta elevada fue elegida para que estos picos sean pronunciados en esas fechas. Análogamente con los períodos de los senos, queremos que se tengan en cuenta los ciclos de seis meses y tres meses respectivamente. \\
 
 {\centering
@@ -58,11 +59,11 @@ Los períodos elegidos se corresponden con la cantidad de semanas. Por ejemplo, 
 % ECM: 1130960.72329
 % ECM: 1991041.60249
 % ECM: 671208.89326
-Con esta familia de funciones obtuvimos (promediando con Cross Validation) un ECM de 1264403. Las cancelaciones por clima en general no fueron sencillas de predecir, y no obtuvimos resultados muy buenos. Diferentes aeropuertos podrían estar sumando cancelaciones en períodos diferentes, es por esto que en el siguiente experimento consideraremos dos aeropuertos particulares: los aeropuertos de Miami y Los Ángeles. La razón de la elección es porque ambos se encuentran en costas opuestas del país, y porque Miami suele sufrir cancelaciones por mal clima sobre todo en época de huracanes (Agosto). \\
+Con esta familia de funciones obtuvimos (promediando con Cross Validation) un ECM de 1264403. Las cancelaciones por clima en general no fueron sencillas de predecir, y no obtuvimos resultados muy buenos. Diferentes aeropuertos podrían estar sumando cancelaciones en períodos diferentes, es por esto que en el siguiente experimento mostramos dos aeropuertos particulares: los aeropuertos de Miami y Los Ángeles. La razón de la elección es porque ambos se encuentran en costas opuestas del país, y porque Miami suele sufrir cancelaciones por mal clima sobre todo en época de huracanes (Agosto). \\
 
 Una aclaración importante: en los datos de Miami quitamos dos valores outliers que representaban mas de 450 cancelaciones esa semana pues distorsionaban el gráfico completamente. Creemos que correspondían al huracán Charley y Katrina. De todos modos, sus respectivos picos en esas fechas se siguieron manteniendo. \\
 
-Para ambos aeropuertos consideraremos la misma familia de funciones que en el experimento anterior, y realizamos Cross Validation para medir los errores. Para Miami obtubimos un ECM de 227. Con Los Ángeles, el ECM fue de 180. Los resultados fueron órdenes de magnitud mejores que cuando consideramos los aeropuertos combinados.
+Para ambos aeropuertos consideraremos la misma familia de funciones que en el experimento anterior, y realizamos Cross Validation para medir los errores. Para Miami obtubimos un ECM de 227. Con Los Ángeles, el ECM fue de 180.
 
 % @Jonno - Miami
 % ECM: 442.585074873
@@ -89,4 +90,8 @@ Para ambos aeropuertos consideraremos la misma familia de funciones que en el ex
 \end{minipage}
 \end{figure}
 
-En conclusión, \todo[inline]{se concluye algo}
+Diferentes aeropuertos tienen diferentes cantidades de cancelaciones, sin embargo en los aeropuertos en los que experimentamos encontramos resultados similares, incluso en los que no mostramos. En los meses de diciembre y enero podemos siempre encontrar los mayores picos de cancelaciones por clima. Además, en los meses de julio y agosto también suelen registrarse picos (aunque de menor altura). \\
+
+En conclusión, gracias a la periodicidad anual y semestral de las cancelaciones por clima, la familia de funciones que fijamos al comienzo de la sección sirve como un buen predictor para distintos aeropuertos. \\
+
+\section{Aerolíneas}
