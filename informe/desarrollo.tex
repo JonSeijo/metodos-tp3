@@ -6,8 +6,6 @@ Los ejes de estudio en los que nos centraremos son:
     \item ¿Cómo se comporta nuestro modelo de cuadrados mínimos con diferentes aerolineas? ¿Podemos predecir alguna mejor que otra?
 \end{itemize}
 
-\todo[inline]{REVISAR SI ES QUE REALMENTE HICIMOS ESTO QUE DICE}
-
 En el primer eje trataremos de encontrar un patrón a las cancelaciones por clima a través del tiempo. ¿Se sigue un patrón regular?, ¿Hay fechas en las cuáles siempre hay cancelaciones? Veremos qué sucede en algunos aeropuertos particulares. \\
 
 En el segundo eje analizaremos los retrasos por aerolíneas. Nos centraremos en algunas más representativas y veremos las regularidades (o irregularidades) que poseen. ¿Hay alguna más dificil de predecir que otras? ¿Cómo se comporta una misma familia de funciones de cuadrados mínimos con distintas aerolineas? ¿Será necesario adaptarlo cada vez? \\
@@ -33,7 +31,7 @@ $ $\newline
 
 Analicemos un poco los datos. El comienzo de 2003 se ve completamente en cero, esto es por la falta de datos sobre cancelaciones climáticas en ese período. En las estimaciones de cuadrados mínimos no tendremos en cuenta este período sin datos, por lo que no nos será de ningún problema. \\
 
-En enero y diciembre (invierno de USA) siempre se observan mayor cantidad de cancelaciones. Consideramos que esto puede deberse a dos motivos: Tormentas de nieve y mal clima en general, y el aumento del caudal de gente que viaja en épocas festivas. \\
+En enero y diciembre (invierno de USA) siempre se observan mayor cantidad de cancelaciones. Consideramos que esto puede deberse a dos motivos: Tormentas de nieve y mal clima en general, y el aumento del caudal de gente que viaja en épocas festivas. Con respecto a esto último, creemos que un aumento en la cantidad total de vuelos implica una mayor cantidad de cancelaciones. \\
 
 En general, en agosto y septiembre se registran gran cantidad de cancelaciones, pero no es así todos los años. Por ejemplo, en 2007 no hay tanta cantidad como en 2004. Creemos que tiene que ver con las temporadas de huracanes, que no todos los años son catastróficas. Con respecto a nuestros datos, en agosto de 2004 el pico puede deberse al huracán Charley \cite{HuracanCharley}, mientras que agosto de 2005 se corresponde con el huracán Katrina \cite{HuracanKatrina}. \\
 
@@ -58,7 +56,7 @@ Los períodos elegidos se corresponden con la cantidad de semanas. Por ejemplo, 
 % ECM: 1130960.72329
 % ECM: 1991041.60249
 % ECM: 671208.89326
-Con esta familia de funciones obtuvimos (promediando con Cross Validation) un ECM de 1264403. Las cancelaciones por clima en general no fueron sencillas de predecir, y no obtuvimos resultados muy buenos. Diferentes aeropuertos podrían estar sumando cancelaciones en períodos diferentes, es por esto que en el siguiente experimento mostramos dos aeropuertos particulares: los aeropuertos de Miami y Los Ángeles. La razón de la elección es porque ambos se encuentran en costas opuestas del país, y porque Miami suele sufrir cancelaciones por mal clima sobre todo en época de huracanes (Agosto). \\
+Con esta familia de funciones obtuvimos (promediando con Cross Validation) un ECM de 1264403. Las cancelaciones por clima en general no fueron sencillas de predecir de manera exacta, y no obtuvimos resultados tan precisos. Diferentes aeropuertos podrían estar sumando cancelaciones en períodos diferentes, es por esto que en el siguiente experimento mostramos dos aeropuertos particulares: los aeropuertos de Miami y Los Ángeles. La razón de la elección es porque ambos se encuentran en costas opuestas del país, y porque Miami suele sufrir cancelaciones por mal clima sobre todo en época de huracanes (Agosto). \\
 
 Una aclaración importante: en los datos de Miami quitamos dos valores outliers que representaban mas de 450 cancelaciones esa semana pues distorsionaban el gráfico completamente. Creemos que correspondían al huracán Charley y Katrina. De todos modos, sus respectivos picos en esas fechas se siguieron manteniendo. \\
 
@@ -91,19 +89,19 @@ Para ambos aeropuertos consideraremos la misma familia de funciones que en el ex
 
 Diferentes aeropuertos tienen diferentes cantidades de cancelaciones, sin embargo en los aeropuertos en los que experimentamos encontramos resultados similares, incluso en los que no mostramos. En los meses de diciembre y enero podemos siempre encontrar los mayores picos de cancelaciones por clima. Además, en los meses de julio y agosto también suelen registrarse picos (aunque de menor altura). \\
 
-Sin embargo hay que destacar la diferencia entre Miami y Los Ángeles. Podemos apreciar como la curva en el grafico de Los Ángeles acompaña a los datos de mejor manera que en el grafico de Miami. Creemos que esto se da por que Miami tiene un clima mas impredecible y por ende tiene picos mas altos en sus cancelaciones, lo que hace al metodo de cuadrados minimos mas inexacto.\\
+Sin embargo hay que destacar la diferencia entre Miami y Los Ángeles. Podemos apreciar como la curva en el grafico de Los Ángeles acompaña a los datos de mejor manera que en el grafico de Miami. Creemos que esto se da por que Miami tiene un clima mas impredecible y por ende tiene picos mas altos en sus cancelaciones, lo que hace al método de cuadrados mínimos mas inexacto.\\
 
-En conclusión, gracias a la periodicidad anual y semestral de las cancelaciones por clima, la familia de funciones que fijamos al comienzo de la sección sirve como un buen predictor para distintos aeropuertos. \\
+En conclusión, gracias a la periodicidad anual y semestral de las cancelaciones por clima, la familia de funciones que fijamos al comienzo de la sección sirve como un buen predictor para distintos aeropuertos, aunque no de forma exacta. \\
 
 \section{Aerolíneas}
 
 \subsection{Preliminares}
-\todo[inline]{Revisar si esto fue efectivamente lo que hicimos}
+
 Para nuestro segundo eje analizaremos la variación de las delays con respecto a diferentes aerolíneas. Intentaremos ver si los mismos patrones se repiten en diferentes aerolíneas, y si es necesario utilizar una familia de funciones diferente para cada aerolínea en particular. \\
 
 Las aerolíneas tienen vuelos en diferentes lugares del país, que a su vez tienen distinta cantidad de vuelos, con condiciones climáticas diferentes. Tomando únicamente las aerolíneas como la variables fijas, hay gran cantidad de ruido en los datos que hace que sea muy dicifil la realización de predicciones. Es por este motivos que en los experimentos a continuación el aeropuerto de origen se encuentra fijo. \\
 
-Si bien realizamos experimentos en varios aeropuertos diferentes, decidimos mostrar únicamente dos aeropuertos distintos, pues en general los resultados son similares. Elegimos en primer lugar el aeropuerto de Los Ángeles, pues hasta 2009 manejaba la mayor cantidad de pasajeros de origen y destino en todo el mundo \cite{LosAngelesAeropuerto}. El segundo aeropuerto que consideramos fue el de Atlanta, que es también uno de los más grandes del país. \\
+Si bien realizamos experimentos en varios aeropuertos diferentes, decidimos mostrar únicamente dos aeropuertos distintos, pues en general los resultados son similares. Elegimos en primer lugar el aeropuerto de Los Ángeles, pues hasta 2009 manejaba la mayor cantidad de pasajeros de origen y destino en todo el mundo \cite{LosAngelesAeropuerto}. El segundo aeropuerto que tomamos fue el de Atlanta, que es también uno de los más grandes del país. \\
 
 Debido al tamaño de los aeropuertos, creemos que las aerolineas cuentan con datos los suficientemente representativos como para realizar predicciones. Esperamos que una misma aerolínea tenga los \textit{mismos patrones} de retrasos independientemente del aeropuerto, aunque es claro que las cantidades totales serán diferentes. \\
 
@@ -152,7 +150,5 @@ El ECM obtenido para Los Ángeles fue de 2607, mientras que para Atlanta obtuvim
 
 En general observamos que no hay una periodicidad bien marcada en los retrasos por aerolíneas. Realizamos los mismos experimentos pero considerando cancelaciones, y también cancelaciones únicamente por climas, pero los resultados fueron los mismos: los datos varían muchísimo semana a semana, y los patrones no son claros. \\
 
-No pudimos realizar aproximaciones \textit{precisas}, sin embargo, podemos identificar patrones anuales y semestrales que se repiten en todas las aerolíneas, en diversos aeropuertos: encontramos una misma familia de funciones que mejor aproximan a distintas aerolíneas. \\
-
-\todo[inline]{Quiza una conclusion mas potente}
+No pudimos realizar aproximaciones \textit{precisas}, sin embargo, podemos identificar patrones anuales y semestrales que se repiten en todas las aerolíneas, en diversos aeropuertos: encontramos una misma familia de funciones que mejor aproximan a distintas aerolíneas. Consideramos que las aproximaciones conseguidas pueden ser útiles si se quiere observar un patrón general. \\
 
