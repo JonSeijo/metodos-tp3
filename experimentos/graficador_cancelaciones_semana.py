@@ -20,6 +20,7 @@ violeta = '#591463'
 
 # https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html
 df_delay_clima = pd.read_csv('datos/delays_mes_clima.csv')
+#df_cancelaciones_clima_semana = pd.read_csv('datos/cancelaciones-semana-porcentaje-2003-2008.csv')
 df_cancelaciones_clima_semana = pd.read_csv('datos/cancelaciones_semana_clima.csv')
 df_cancelaciones_clima = pd.read_csv('datos/cancelaciones_mes_clima-2000-2008.csv')
 
@@ -52,14 +53,15 @@ def plotear_cancelaciones(color_in=violeta):
     espaciado = 24
     enum = [x for x in range(12*6*4 + 1)]
     labels = [str(year) + " - " + str(mes) for year in range(2003, 2009) for mes in listar_meses() for semana in range(4)]
-
+    print(labels)
     df_cancelaciones_clima_semana['y'] = df_cancelaciones_clima_semana['valor']
+    #df_cancelaciones_clima_semana['x'] = range(314) #range(len(labels))
     df_cancelaciones_clima_semana['x'] = range(len(labels))
 
     ax = df_cancelaciones_clima_semana['valor'].plot(title='Cancelaciones por clima', linestyle='--', marker='o', color=color_in)
 
     ax.set_xlabel('Semana')
-    ax.set_ylabel('Cancelaciones por semana')
+    ax.set_ylabel('Cancelaciones por semana (%)')
 
     ax.set_xticks(enum[::espaciado])
     ax.set_xticklabels(labels[::espaciado], rotation=45)
@@ -122,12 +124,13 @@ def predecir_cancelaciones(k):
 def armar_matriz_A(s):
     return np.array([
         [
-            1,
-            np.sin(0.7*t),
-            np.cos(0.7*t),
-            np.sin(0.08 * t),
-            np.cos(0.08 * t),
-
+           1,
+            np.sin(np.pi/(12.0*4.0)*t),
+            np.cos(np.pi/(12.0*4.0)*t),
+            np.sin(np.pi/(6.0*4.0) * t),
+            np.cos(np.pi/(6.0*4.0) * t),
+            np.sin(np.pi/(3.0*4.0) * t),
+            np.cos(np.pi/(3.0*4.0) * t),
         ] for t in s])
 
 
