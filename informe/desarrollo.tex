@@ -105,17 +105,18 @@ Las aerolíneas tienen vuelos en diferentes lugares del país, que a su vez tien
 
 Para mostrar nuestros experimentos, elegimos el aeropuerto de Los Ángeles pues hasta 2009 manejaba la mayor cantidad de pasajeros de origen y destino en todo el mundo \cite{LosAngelesAeropuerto}. Por este motivo las aerolineas cuentan con datos los suficientemente representativos como para realizar predicciones. \\
 
-\todo[inline]{Es obvio que no es definitivo etcetera etcetera}
-\todo[inline]{Escribir la intro a la funcion y explicacion de la funcion}
+A diferencia de la sección anterior, sobre delays en general existen datos previos al 2003. Sin embargo, los datos mas antiguos parecen seguir un patrón diferente a los de los ultimos años. Consideramos que para realizar una predicción para el año siguiente, tomar los últimos 5 años es representativo, por lo que los datos que mostramos seguirán siendo a partir de 2003. \\
 
-Realizamos cuadrádos mínimos BLABALBALA
+\todo[inline]{VER - Creo que convenia mostrar es diferentes funciones de CM para distintas aerolineas}
+\todo[inline]{Caso contrario, justificar por que usamos la misma para todos}
+
+Realizamos cuadrádos mínimos con varias familias de funciones, comparando ECM con Cross Validation y encontramos que la siguiente es la familia con la que mejores predicciones obtuvimos:
 
 \begin{align}
-f(t) &= a + b * t + c * cos(\frac{\pi}{96.4} t) + d * cos(\frac{\pi}{24} t) + e * cos(\frac{\pi}{12} t)
+f(t) &= \alpha_1 + \alpha_2 * t + \alpha_3 * cos(\frac{\pi}{96} t) + \alpha_4 * cos(\frac{\pi}{24} t) + \alpha_5 * cos(\frac{\pi}{12} t)
 \end{align}
 
-
-\todo[inline]{@Jonno Fijar un aeropuerto da resultados mucho mejores que dejar todo libre, pero es obvio que no predice bien. Por ahi fijando otro anda mejor, con Atlanta seguro que no porque ese lo probe, muchas semanas estan en cero}
+\todo[inline]{Hablar de las diferencias con la del exp anterior}
 
 \begin{figure}[H]
 \centering
@@ -133,7 +134,6 @@ f(t) &= a + b * t + c * cos(\frac{\pi}{96.4} t) + d * cos(\frac{\pi}{24} t) + e 
 
 
 
-
 \begin{figure}[H]
 \centering
 \begin{minipage}{.5\textwidth}
@@ -148,14 +148,34 @@ f(t) &= a + b * t + c * cos(\frac{\pi}{96.4} t) + d * cos(\frac{\pi}{24} t) + e 
 \end{minipage}
 \end{figure}
 
-Puede observarse que incluso fijando el aeropuerto hay mucha diferencia en las cancelaciones semana a semana de las aerolíneas, pese a que en un marco mas grande siguen un determinado patrón.
+$ $\newline
+Puede observarse que incluso fijando el aeropuerto hay mucha diferencia en las cancelaciones semana a semana de las aerolíneas.
 
 Los ECM obtenidos fueron \todo[inline]{@Jonno: estos los tengo despues los escribo}
 
 
-\todo[inline]{Completar con otra familia de funciones u otro aeropuerto o algo}
+Los retrasos en Los Ángeles para cada aerolínea son complicados de predecir. Es por esto que decidimos tomar otros aeropuertos para ver si se mantenía el mismo fenómeno. A continuación se muestran algunos resultados de vuelos con origen en el Aeropuerto de Atlanta, que es también uno de los más grandes del país. \\
+
+Es interesante notar que las mejores aproximaciones no se obtuvieron con la misma familia de funciones que en el experimento anterior, pese a haber tomado las mismas aerolineas. Esto nos indica que para realizar predicciones en algún aeropuerto, debemos modificar las fuciones que elegimos y adaptarlas a cada aeropuerto en particular. \\
+
+Dado que los gráficos son similares sólo mostraremos algunos de ellos: \\
+
+{\centering
+  \includegraphics[width=0.7\linewidth]{informe/imagenes/retrasosAmericanAirlinesATL.pdf}
+  \captionof{figure}{Retrasos - American Airlines\\}
+}
+$ $\newline
+{\centering
+  \includegraphics[width=0.7\linewidth]{informe/imagenes/retrasosUnitedAirlinesLA.pdf}
+  \captionof{figure}{Retrasos - United Airlines\\}
+}
+$ $\newline
 
 
+La función utilizada fue \\
+\todo[inline]{Completar funcion y ECM}
 
+Cómo vemos en las figuras, no hay una periodicidad bien marcada en los retrasos por aerolinea, para ninguna de las aerolineas consideradas. Realizamos los mismos experimentos con aerolíneas pero considerando cancelaciones, y también cancelaciones únicamente por climas, pero los resultados fueron los mismos: los datos varían muchísimo semana a semana. \\
 
+En conclusión, debido a las grandes varianzas no nos es posible realizar aproximaciones y/o predicciones \textit{precisas} si consideramos aerolíneas por separado. \\
 

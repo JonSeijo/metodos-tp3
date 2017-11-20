@@ -55,11 +55,20 @@ df_cancelaciones_clima_origen_orlando = pd.read_csv('datos/cancelados_semana_cli
 
 # df_delays_semana_atlanta_unitedairlines = pd.read_csv('datos/delays_semana_atlanta_unitedairlines.csv')
 
-df_delays_semana_losangeles_unitedairlines = pd.read_csv('datos/delays_semana_losangeles_unitedairlines.csv')
 df_delays_semana_losangeles_expressjet = pd.read_csv('datos/delays_semana_losangeles_expressjet.csv')
+df_delays_semana_losangeles_unitedairlines = pd.read_csv('datos/delays_semana_losangeles_unitedairlines.csv')
 df_delays_semana_losangeles_deltaairlines = pd.read_csv('datos/delays_semana_losangeles_deltaairlines.csv')
 df_delays_semana_losangeles_americanairlines = pd.read_csv('datos/delays_semana_losangeles_americanairlines.csv')
 df_delays_semana_losangeles_southwestairlines = pd.read_csv('datos/delays_semana_losangeles_southwestairlines.csv')
+
+
+df_delays_semana_atlanta_unitedairlines = pd.read_csv('datos/delays_semana_atlanta_unitedairlines.csv')
+df_delays_semana_atlanta_deltaairlines = pd.read_csv('datos/delays_semana_atlanta_deltaairlines.csv')
+df_delays_semana_atlanta_americanairlines = pd.read_csv('datos/delays_semana_atlanta_americanairlines.csv')
+df_delays_semana_atlanta_southwestairlines = pd.read_csv('datos/delays_semana_atlanta_southwestairlines.csv')
+
+
+
 # df_delays_semana_expressjet = pd.read_csv('datos/delays_semana_expressjet.csv')
 
 df_cancelados_semana_americanairlines = pd.read_csv('datos/cancelados_semana_americanairlines.csv')
@@ -276,7 +285,7 @@ def armar_matriz_A(s):
     return np.array([
         [
             1,
-            t,
+            # t,
             # np.log(t+1),
             # t**2,
             # np.cos(np.pi/(12.0*4.0)*t)**8,
@@ -327,7 +336,12 @@ def cuadrados_minimos(df, titulo='Cancelaciones por clima', ylabel='Cancelacione
 # cuadrados_minimos(df_cancelados_semana_americanairlines, titulo='Cancelaciones - American Airlines')
 
 
-cuadrados_minimos(df_delays_semana_losangeles_unitedairlines, titulo='Retrasos - Los Angeles - United Airlines', ylabel='Retrasos por semana')
-cuadrados_minimos(df_delays_semana_losangeles_deltaairlines, titulo='Retrasos - Los Angeles - Delta Airlines', ylabel='Retrasos por semana')
-cuadrados_minimos(df_delays_semana_losangeles_americanairlines, titulo='Retrasos - Los Angeles - American Airlines', ylabel='Retrasos por semana')
-cuadrados_minimos(df_delays_semana_losangeles_southwestairlines, titulo='Retrasos - Los Angeles - SouthWest Airlines', ylabel='Retrasos por semana')
+# cuadrados_minimos(df_delays_semana_losangeles_unitedairlines, titulo='Retrasos - Los Angeles - United Airlines', ylabel='Retrasos por semana')
+# cuadrados_minimos(df_delays_semana_losangeles_deltaairlines, titulo='Retrasos - Los Angeles - Delta Airlines', ylabel='Retrasos por semana')
+# cuadrados_minimos(df_delays_semana_losangeles_americanairlines, titulo='Retrasos - Los Angeles - American Airlines', ylabel='Retrasos por semana')
+# cuadrados_minimos(df_delays_semana_losangeles_southwestairlines, titulo='Retrasos - Los Angeles - SouthWest Airlines', ylabel='Retrasos por semana')
+
+cuadrados_minimos(df_delays_semana_atlanta_unitedairlines, titulo='Retrasos - Atlanta - United Airlines', ylabel='Retrasos por semana')
+# cuadrados_minimos(df_delays_semana_atlanta_deltaairlines, titulo='Retrasos - Atlanta - Delta Airlines', ylabel='Retrasos por semana')
+cuadrados_minimos(df_delays_semana_atlanta_americanairlines, titulo='Retrasos - Atlanta - American Airlines', ylabel='Retrasos por semana')
+# cuadrados_minimos(df_delays_semana_atlanta_southwestairlines, titulo='Retrasos - Atlanta - SouthWest Airlines', ylabel='Retrasos por semana')
