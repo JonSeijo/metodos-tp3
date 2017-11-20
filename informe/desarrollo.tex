@@ -8,9 +8,9 @@ Los ejes de estudio en los que nos centraremos son:
 
 \todo[inline]{REVISAR SI ES QUE REALMENTE HICIMOS ESTO QUE DICE}
 
-En el primer eje trataremos de encontrar un patrón a las cancelaciones por clima a través del tiempo. ¿Se sigue un patrón regular?, ¿Hay fechas en las cuáles siempre hay cancelaciones? Veremos además que sucede con los retrasos en algunos aeropuertos particulares. \\
+En el primer eje trataremos de encontrar un patrón a las cancelaciones por clima a través del tiempo. ¿Se sigue un patrón regular?, ¿Hay fechas en las cuáles siempre hay cancelaciones? Veremos qué sucede en algunos aeropuertos particulares. \\
 
-En el segundo eje analizaremos las aerolíneas. Nos centraremos en algunas más representativas y veremos las regularidades (o irregularidades) que poseen. ¿Hay alguna más dificil de predecir que otras? ¿Cómo se comporta una misma familia de funciones de cuadrados mínimos con distintas aerolineas? ¿Será necesario adaptarlo cada vez? \\
+En el segundo eje analizaremos los retrasos por aerolíneas. Nos centraremos en algunas más representativas y veremos las regularidades (o irregularidades) que poseen. ¿Hay alguna más dificil de predecir que otras? ¿Cómo se comporta una misma familia de funciones de cuadrados mínimos con distintas aerolineas? ¿Será necesario adaptarlo cada vez? \\
 
 \section{Cancelaciones por clima}
 
@@ -45,7 +45,7 @@ Como curiosidad, en agosto de 2003 se encuentra un pico aislado de los demás. C
 Para la predicción con cuadrados mínimos, la mejor familia de funciones que encontramos fue la siguiente:
 
 \begin{align}
-f(t) &= a + b * cos(\frac{\pi}{48} t)^{8} + c * sen(\frac{\pi}{24} t) + d * sen(\frac{\pi}{12} t)
+f(t) &= \alpha_1 + \alpha_2 * cos(\frac{\pi}{48} t)^{8} + \alpha_3 * sen(\frac{\pi}{24} t) + \alpha_4 * sen(\frac{\pi}{12} t)
 \end{align}
 
 {\centering
@@ -113,122 +113,46 @@ A diferencia de la sección anterior, sobre delays en general existen datos prev
 
 \subsection{Experimentos}
 
-La primer aerolínea que consideramos será United Airlines. En todos los aeropuertos encontramos que hay mucha variación en los retrasos semana a semana, lo que hace que sea dificil encontrar una familia de funciones que aproxime bien a todos los datos. Sin embargo, aunque las predicciones no hayan sido del todo buenas, queremos destacar que fue la misma familia de funciones la que logró minimizar el ECM en los distintos aeropuertos. \\
+La primer aerolínea que consideramos será United Airlines. En todos los aeropuertos encontramos que hay mucha variación en los retrasos semana a semana, lo que hace que sea dificil encontrar una familia de funciones que aproxime bien a todos los datos. Sin embargo, aunque las predicciones no hayan sido del todo buenas, queremos destacar que fue la misma familia de funciones la que logró minimizar el ECM en los distintos aeropuertos. Esta familia fue distinta (aunque similar) a la del primer eje.\\
 
 \begin{align}
-f(t) &= \alpha_1 + \alpha_2 * cos(\frac{\pi}{192} t) + \alpha_3 * cos(\frac{\pi}{48} t) + \alpha_4 * cos(\frac{\pi}{24} t)
+f(t) &= \alpha_1 + \alpha_2 * t + \alpha_3 * cos(\frac{\pi}{48} t) + \alpha_4 * cos(\frac{\pi}{24} t) + \alpha_5 * cos(\frac{\pi}{12} t)
 \end{align}
 
-\todo[inline]{Explicacion de la funcion, periodos}
-
+Agregamos un término lineal pues a lo largo del tiempo las cancelaciones no se encuentran sobre el mismo nivel. Los períodos de los cosenos se corresponden a un año, seis meses y tres meses respectivamente. Creemos que con estos períodos se logra representar la información sobre cancelaciones. Períodos mas pequeños y mas grandes producen peores resultados en cuanto al error cuadrático medio. \\
 
 {\centering
-  \includegraphics[width=1.0\linewidth]{informe/imagenes/retrasosUnitedAirlinesLAvol2.pdf}
+  \includegraphics[width=1.0\linewidth]{informe/imagenes/retrasosUnitedAirlinesLAvol3.pdf}
   \captionof{figure}{Retrasos - United Airlines - Los Ángeles\\}
 }
 $ $\newline
 {\centering
-  \includegraphics[width=1.0\linewidth]{informe/imagenes/retrasosUnitedAirlinesATLvol2.pdf}
+  \includegraphics[width=1.0\linewidth]{informe/imagenes/retrasosUnitedAirlinesATLvol3.pdf}
   \captionof{figure}{Retrasos - United Airlines - Atlanta\\}
 }
 $ $\newline
 
-En Los Ángeles es dónde encontramos \todo[inline]{Completar explicacion de los graficos}
+Tanto en Los Ángeles como en Atlanta nos encontramos con que los datos no siguen un patron bien marcado como en el primer eje de estudio. Los ECM, aplicando Cross Validation, fueron de 2619 para Los Ángeles y 56 para Atlanta.
+Como habíamos mencionado, la misma familia fue la que minimizó los ECM de cada aeropuerto. Esto nos parece importante, porque quiere decir que existen patrones en los retrasos de una aerolínea que no tienen que ver con el lugar dónde se encuentran. \\
 
-Para una misma aerolinea, la misma familia fue la que minimizó los ECM de cada aeropuerto. Esto nos parece importante, porque quiere decir que existen patrones en los retrasos de una aerolínea que no tienen que ver con el lugar dónde se encuentran. \\
-
-Veamos que sucede si tomamos otra aerolínea, como es el caso de American Airlines. \todo[inline]{Completar American Airlines}
-
-\todo[inline]{Explicacion de la funcion. Aclarar que es casi igual a la anterior pero con un termino de coseno extra}
-
-\begin{align}
-f(t) &= \alpha_1 + \alpha_2 * cos(\frac{\pi}{192} t) + \alpha_3 * cos(\frac{\pi}{48} t) + \alpha_4 * cos(\frac{\pi}{24} t) + \alpha_5 * cos(\frac{\pi}{12})
-\end{align}
-
-\todo[inline]{Explicacion de la funcion, periodos}
-
+Veamos que sucede si tomamos otra aerolínea, como es el caso de American Airlines. Sospechábamos que la mejor familia iba a ser una diferente, pues distintas aerolíneas podrían tener distintos períodos de cancelaciones. Nos encontramos con algo muy interesante: la misma familia de funciones que usamos con United Airlines minimiza también los ECM de American Airlines. \\
 
 {\centering
-  \includegraphics[width=1.0\linewidth]{informe/imagenes/retrasosAmericanAirlinesLAvol2.pdf}
+  \includegraphics[width=1.0\linewidth]{informe/imagenes/retrasosAmericanAirlinesLAvol3.pdf}
   \captionof{figure}{Retrasos - American Airlines - Los Ángeles\\}
 }
 $ $\newline
 {\centering
-  \includegraphics[width=1.0\linewidth]{informe/imagenes/retrasosAmericanAirlinesATLvol2.pdf}
+  \includegraphics[width=1.0\linewidth]{informe/imagenes/retrasosAmericanAirlinesATLvol3.pdf}
   \captionof{figure}{Retrasos - American Airlines - Atlanta\\}
 }
 $ $\newline
 
-\todo[inline]{Descripcion de graficos y mencionar los ECM}
+El ECM obtenido para Los Ángeles fue de 2607, mientras que para Atlanta obtuvimos 281. \\
 
-% Realizamos cuadrádos mínimos con varias familias de funciones, comparando ECM con Cross Validation y encontramos que la siguiente es la familia con la que mejores predicciones obtuvimos:
+En general observamos que no hay una periodicidad bien marcada en los retrasos por aerolíneas. Realizamos los mismos experimentos pero considerando cancelaciones, y también cancelaciones únicamente por climas, pero los resultados fueron los mismos: los datos varían muchísimo semana a semana, y los patrones no son claros. \\
 
-% \begin{align}
-% f(t) &= \alpha_1 + \alpha_2 * t + \alpha_3 * cos(\frac{\pi}{96} t) + \alpha_4 * cos(\frac{\pi}{24} t) + \alpha_5 * cos(\frac{\pi}{12} t)
-% \end{align}
+No pudimos realizar aproximaciones \textit{precisas}, sin embargo, podemos identificar patrones anuales y semestrales que se repiten en todas las aerolíneas, en diversos aeropuertos: encontramos una misma familia de funciones que mejor aproximan a distintas aerolíneas. \\
 
-% \todo[inline]{Hablar de las diferencias con la del exp anterior}
-
-% \begin{figure}[H]
-% \centering
-% \begin{minipage}{.5\textwidth}
-%   \centering
-%   \includegraphics[width=1.1\linewidth]{informe/imagenes/retrasosAmericanAirlinesLA.pdf}
-%   \captionof{figure}{Retrasos - American Airlines}
-% \end{minipage}%
-% \begin{minipage}{.5\textwidth}
-%   \centering
-%     \includegraphics[width=1.1\linewidth]{informe/imagenes/retrasosDeltaAirlinesLA.pdf}
-%     \captionof{figure}{Retrasos - Delta Airlines}
-% \end{minipage}
-% \end{figure}
-
-
-
-% \begin{figure}[H]
-% \centering
-% \begin{minipage}{.5\textwidth}
-%   \centering
-%   \includegraphics[width=1.1\linewidth]{informe/imagenes/retrasosSouthWestLA.pdf}
-%   \captionof{figure}{Retrasos - SouthWest Airlines}
-% \end{minipage}%
-% \begin{minipage}{.5\textwidth}
-%   \centering
-%     \includegraphics[width=1.1\linewidth]{informe/imagenes/retrasosUnitedAirlinesLA.pdf}
-%     \captionof{figure}{Retrasos - United Airlines}
-% \end{minipage}
-% \end{figure}
-
-% $ $\newline
-% Puede observarse que incluso fijando el aeropuerto hay mucha diferencia en las cancelaciones semana a semana de las aerolíneas.
-
-% Los ECM obtenidos fueron \todo[inline]{@Jonno: estos los tengo despues los escribo}
-
-
-% Los retrasos en Los Ángeles para cada aerolínea son complicados de predecir. Es por esto que decidimos tomar otros aeropuertos para ver si se mantenía el mismo fenómeno. A continuación se muestran algunos resultados de vuelos con origen en el Aeropuerto de Atlanta, que es también uno de los más grandes del país. \\
-
-% Es interesante notar que las mejores aproximaciones no se obtuvieron con la misma familia de funciones que en el experimento anterior, pese a haber tomado las mismas aerolineas. Esto nos indica que para realizar predicciones en algún aeropuerto, debemos modificar las fuciones que elegimos y adaptarlas a cada aeropuerto en particular. \\
-
-% Dado que los gráficos son similares sólo mostraremos algunos de ellos: \\
-
-% {\centering
-%   \includegraphics[width=0.7\linewidth]{informe/imagenes/retrasosAmericanAirlinesATL.pdf}
-%   \captionof{figure}{Retrasos - American Airlines\\}
-% }
-% $ $\newline
-% {\centering
-%   \includegraphics[width=0.7\linewidth]{informe/imagenes/retrasosUnitedAirlinesATL.pdf}
-%   \captionof{figure}{Retrasos - United Airlines\\}
-% }
-% $ $\newline
-
-
-% La función utilizada fue \\
-% \todo[inline]{Completar funcion y ECM}
-
-\todo[inline]{Ver esto}
-Cómo vemos en las figuras, no hay una periodicidad bien marcada en los retrasos por aerolinea, para ninguna de las aerolineas consideradas. Realizamos los mismos experimentos con aerolíneas pero considerando cancelaciones, y también cancelaciones únicamente por climas, pero los resultados fueron los mismos: los datos varían muchísimo semana a semana. \\
-
-\todo[inline]{Reescribir conclusion, hacer enfasis en que las familias de funciones que mejor predicen para todas las aerolineas son similares}
-En conclusión, debido a las grandes varianzas no nos es posible realizar aproximaciones y/o predicciones \textit{precisas} si consideramos aerolíneas por separado. Sin embargo, pudimos identificar patrones generales y vimos que son familias de funciones similares las que mejor aproximas a las diferentes aerolíneas. \\
+\todo[inline]{Quiza una conclusion mas potente}
 
