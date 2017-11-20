@@ -34,7 +34,8 @@ def listar_meses():
 # df_cancelaciones_clima_miami = pd.read_csv('datos/cancelados_clima_destino_miami.csv')
 
 # df_cancelaciones_clima_orig_miami = pd.read_csv('datos/cancelados_clima_origen_miami.csv')
-# df_cancelaciones_clima_orig_miami_sinouts = pd.read_csv('datos/cancelados_clima_origen_miami_sinouts.csv')
+df_cancelaciones_clima_orig_miami_sinouts = pd.read_csv('datos/cancelados_clima_origen_miami_sinouts.csv')
+df_cancelaciones_semana_clima = pd.read_csv('datos/cancelaciones_semana_clima.csv')
 
 # df_delay_clima_orig_miami = pd.read_csv('datos/delay_clima_origen_miami.csv')
 # df_cancelaciones_origen_orlando = pd.read_csv('datos/cancelados_gral_origen_orlando.csv')
@@ -300,9 +301,20 @@ def armar_matriz_A(s):
             # np.cos(np.pi/(12.0*4.0) * t ),
             # np.cos(np.pi/(3.0*4.0) * t ),
 
+
+            # np.cos(np.pi/(24.0*4.0)* t),
+
+
+
+
             # t,
             # np.log(t+1),
 
+            # UNITED AIRLINES
+            t,
+            np.cos(np.pi/(12.0*4.0)* t),
+            np.cos(np.pi/(6.0*4.0) * t),
+            np.cos(np.pi/(3.0*4.0) * t),
 
             # UNITED AIRLINES - Mejor en gral
             # np.cos(np.pi/(48.0*4.0) * t ),
@@ -312,10 +324,10 @@ def armar_matriz_A(s):
 
             # DELTA AIRLINES - Bastante buena
             # AMERICAN AIRLINES - Mejor en gral
-            np.cos(np.pi/(48.0*4.0) * t ),
-            np.cos(np.pi/(12.0*4.0) * t ),
-            np.cos(np.pi/(6.0*4.0) * t ),
-            np.cos(np.pi/(3.0*4.0) * t ),
+            # np.cos(np.pi/(48.0*4.0) * t ),
+            # np.cos(np.pi/(12.0*4.0) * t ),
+            # np.cos(np.pi/(6.0*4.0) * t ),
+            # np.cos(np.pi/(3.0*4.0) * t ),
 
 
 
@@ -370,6 +382,9 @@ def cuadrados_minimos(df, titulo='Cancelaciones por clima', ylabel='Cancelacione
     print("\n")
 
 
+
+# cuadrados_minimos(df_cancelaciones_semana_clima, titulo='Cancelaciones por clima')
+
 # cuadrados_minimos(df_cancelaciones_clima_orig_miami, titulo='Cancelaciones por clima - Miami')
 # cuadrados_minimos(df_cancelaciones_clima_orig_miami_sinouts, titulo='Cancelaciones por clima - Miami (Sin outliers)')
 # cuadrados_minimos(df_cancelaciones_origen_losangeles, titulo='Cancelaciones por clima - Los Ángeles')
@@ -394,5 +409,5 @@ cuadrados_minimos(df_delays_semana_losangeles_americanairlines, titulo='Retrasos
 # cuadrados_minimos(df_delays_semana_losangeles_southwestairlines, titulo='Retrasos - Los Angeles - SouthWest Airlines', ylabel='Retrasos por semana')
 
 # cuadrados_minimos(df_delays_semana_atlanta_unitedairlines, titulo='Retrasos - Atlanta - United Airlines', ylabel='Retrasos por semana')
-cuadrados_minimos(df_delays_semana_atlanta_americanairlines, titulo='Retrasos - Atlanta - American Airlines', ylabel='Retrasos por semana')
+# cuadrados_minimos(df_delays_semana_atlanta_americanairlines, titulo='Retrasos - Atlanta - American Airlines', ylabel='Retrasos por semana')
 
