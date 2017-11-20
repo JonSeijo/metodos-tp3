@@ -295,31 +295,79 @@ def armar_matriz_A(s):
             # np.cos(np.pi/(48.0*4.0) * t ),
             # np.cos(np.pi/(12.0*4.0) * t ),
 
-            np.cos(np.pi/(24.0*4.0) * t ),
+            # 1570
+            # np.log(t+1),
+            # np.cos(np.pi/(12.0*4.0) * t ),
+            # np.cos(np.pi/(3.0*4.0) * t ),
+
+            # t,
+            # np.log(t+1),
+
+
+            # UNITED AIRLINES - Mejor en gral
+            # np.cos(np.pi/(48.0*4.0) * t ),
+            # np.cos(np.pi/(12.0*4.0) * t ),
+            # np.cos(np.pi/(6.0*4.0) * t ),
+
+
+            # DELTA AIRLINES - Bastante buena
+            # AMERICAN AIRLINES - Mejor en gral
+            np.cos(np.pi/(48.0*4.0) * t ),
+            np.cos(np.pi/(12.0*4.0) * t ),
             np.cos(np.pi/(6.0*4.0) * t ),
             np.cos(np.pi/(3.0*4.0) * t ),
+
+
+
+            # 2286
+            # np.cos(np.pi/(24.0*4.0) * t ),
+            # np.cos(np.pi/(6.0*4.0) * t ),
+            # np.cos(np.pi/(3.0*4.0) * t ),
+
+            # 2422
+            # np.cos(np.pi/(24.0*4.0) * t ),
+            # np.cos(np.pi/(12.0*4.0) * t ),
+            # np.cos(np.pi/(6.0*4.0) * t ),
+            # np.cos(np.pi/(3.0*4.0) * t ),
+
+            # 1373
+            # np.cos(np.pi/(96.0*4.0) * t ),
+            # np.cos(np.pi/(6.0*4.0) * t ),
+            # np.cos(np.pi/(3.0*4.0) * t ),
+
+            # 2105
+            # np.cos(np.pi/(48.0*4.0) * t ),
+            # np.cos(np.pi/(6.0*4.0) * t ),
+            # np.cos(np.pi/(3.0*4.0) * t ),
 
 
 
         ] for t in s])
 
 
-
 def cuadrados_minimos(df, titulo='Cancelaciones por clima', ylabel='Cancelaciones por semana'):
-    ax = preplot_cuadminimos(df, title=titulo, ylabel=ylabel, color=azul)
-    # Predigo a partir del year 5
-    df_entrenamiento, df_prediccion = predecir_cancelaciones(df, get_year(4))
+    ecmtotal = []
 
-    # Grafico predicciones y aproximacino
-    sns.tsplot(ax=ax, time=df_entrenamiento['x'], data=df_entrenamiento['pred'], color='red', legend=True)
-    sns.tsplot(ax=ax, time=df_prediccion['x'], data=df_prediccion['pred'], color='green', legend=True)
+    for year_inicial in range(3,6):
+        ax = preplot_cuadminimos(df, title=titulo, ylabel=ylabel, color=azul)
+        # Predigo a partir del year 5
+        # df_entrenamiento, df_prediccion = predecir_cancelaciones(df, get_year(5))
+        df_entrenamiento, df_prediccion = predecir_cancelaciones(df, get_year(year_inicial))
 
-    ax.legend(["Datos", "Aproximación", "Prediccion"])
+        # Grafico predicciones y aproximacino
+        sns.tsplot(ax=ax, time=df_entrenamiento['x'], data=df_entrenamiento['pred'], color='red', legend=True)
+        sns.tsplot(ax=ax, time=df_prediccion['x'], data=df_prediccion['pred'], color='green', legend=True)
 
-    print("ECM: " + str(calcularECM(df_prediccion)))
+        ax.legend(["Datos", "Aproximación", "Prediccion"])
 
-    plt.xlim((0, get_year(6)))
-    plt.show()
+        ecmtotal.append(calcularECM(df_prediccion))
+        print("ECM: " + str(calcularECM(df_prediccion)))
+
+        plt.xlim((0, get_year(6)))
+        plt.show()
+
+    print("ECM TOTAL:", sum(ecmtotal)/len(ecmtotal))
+    print("\n")
 
 
 # cuadrados_minimos(df_cancelaciones_clima_orig_miami, titulo='Cancelaciones por clima - Miami')
@@ -335,13 +383,16 @@ def cuadrados_minimos(df, titulo='Cancelaciones por clima', ylabel='Cancelacione
 # cuadrados_minimos(df_cancelados_semana_deltaairlines, titulo='Cancelaciones - Delta Airlines')
 # cuadrados_minimos(df_cancelados_semana_americanairlines, titulo='Cancelaciones - American Airlines')
 
+# cuadrados_minimos(df_delays_semana_atlanta_deltaairlines, titulo='Retrasos - Atlanta - Delta Airlines', ylabel='Retrasos por semana')
+# cuadrados_minimos(df_delays_semana_atlanta_southwestairlines, titulo='Retrasos - Atlanta - SouthWest Airlines', ylabel='Retrasos por semana')
+
+
 
 # cuadrados_minimos(df_delays_semana_losangeles_unitedairlines, titulo='Retrasos - Los Angeles - United Airlines', ylabel='Retrasos por semana')
 # cuadrados_minimos(df_delays_semana_losangeles_deltaairlines, titulo='Retrasos - Los Angeles - Delta Airlines', ylabel='Retrasos por semana')
-# cuadrados_minimos(df_delays_semana_losangeles_americanairlines, titulo='Retrasos - Los Angeles - American Airlines', ylabel='Retrasos por semana')
+cuadrados_minimos(df_delays_semana_losangeles_americanairlines, titulo='Retrasos - Los Angeles - American Airlines', ylabel='Retrasos por semana')
 # cuadrados_minimos(df_delays_semana_losangeles_southwestairlines, titulo='Retrasos - Los Angeles - SouthWest Airlines', ylabel='Retrasos por semana')
 
-cuadrados_minimos(df_delays_semana_atlanta_unitedairlines, titulo='Retrasos - Atlanta - United Airlines', ylabel='Retrasos por semana')
-# cuadrados_minimos(df_delays_semana_atlanta_deltaairlines, titulo='Retrasos - Atlanta - Delta Airlines', ylabel='Retrasos por semana')
+# cuadrados_minimos(df_delays_semana_atlanta_unitedairlines, titulo='Retrasos - Atlanta - United Airlines', ylabel='Retrasos por semana')
 cuadrados_minimos(df_delays_semana_atlanta_americanairlines, titulo='Retrasos - Atlanta - American Airlines', ylabel='Retrasos por semana')
-# cuadrados_minimos(df_delays_semana_atlanta_southwestairlines, titulo='Retrasos - Atlanta - SouthWest Airlines', ylabel='Retrasos por semana')
+
