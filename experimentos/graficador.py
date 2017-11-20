@@ -23,28 +23,21 @@ def listar_meses():
 # Levanto los datos
 
 # https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html
-df_delay_clima = pd.read_csv('datos/delays_mes_clima.csv')
+# df_delay_clima = pd.read_csv('datos/delays_mes_clima.csv')
 
-df_cancelaciones_general = pd.read_csv('datos/cancelados_semana_general.csv')
-df_cancelaciones_general_dest_atlanta = pd.read_csv('datos/cancelados_semana_general_dest_atlanta.csv')
-df_cancelaciones_general_origen_atlanta = pd.read_csv('datos/cancelados_semana_general_origen_atlanta.csv')
+# df_cancelaciones_general = pd.read_csv('datos/cancelados_semana_general.csv')
+# df_cancelaciones_general_origen_atlanta = pd.read_csv('datos/cancelados_semana_general_origen_atlanta.csv')
 
-df_cancelaciones_atlanta = pd.read_csv('datos/cancelados_destino_atlanta.csv')
-df_cancelaciones_miami = pd.read_csv('datos/cancelados_destino_miami.csv')
-df_cancelaciones_clima_atlanta = pd.read_csv('datos/cancelados_clima_destino_atlanta.csv')
-df_cancelaciones_clima_miami = pd.read_csv('datos/cancelados_clima_destino_miami.csv')
+# df_cancelaciones_atlanta = pd.read_csv('datos/cancelados_destino_atlanta.csv')
+# df_cancelaciones_miami = pd.read_csv('datos/cancelados_destino_miami.csv')
+# df_cancelaciones_clima_atlanta = pd.read_csv('datos/cancelados_clima_destino_atlanta.csv')
+# df_cancelaciones_clima_miami = pd.read_csv('datos/cancelados_clima_destino_miami.csv')
 
-df_cancelaciones_orig_miami = pd.read_csv('datos/cancelados_origen_miami.csv')
-df_cancelaciones_clima_orig_miami = pd.read_csv('datos/cancelados_clima_origen_miami.csv')
-df_cancelaciones_clima_orig_miami_sinouts = pd.read_csv('datos/cancelados_clima_origen_miami_sinouts.csv')
+# df_cancelaciones_clima_orig_miami = pd.read_csv('datos/cancelados_clima_origen_miami.csv')
+# df_cancelaciones_clima_orig_miami_sinouts = pd.read_csv('datos/cancelados_clima_origen_miami_sinouts.csv')
 
-df_delay_clima_orig_miami = pd.read_csv('datos/delay_clima_origen_miami.csv')
-df_minutos_delay_clima_orig_miami = pd.read_csv('datos/minutos_delay_clima_origen_miami.csv')
-
-df_cancelaciones_clima_semana = pd.read_csv('datos/cancelaciones_semana_clima.csv')
-df_cancelaciones_clima = pd.read_csv('datos/cancelaciones_mes_clima-2000-2008.csv')
-
-df_cancelaciones_origen_orlando = pd.read_csv('datos/cancelados_gral_origen_orlando.csv')
+# df_delay_clima_orig_miami = pd.read_csv('datos/delay_clima_origen_miami.csv')
+# df_cancelaciones_origen_orlando = pd.read_csv('datos/cancelados_gral_origen_orlando.csv')
 
 df_cancelaciones_origen_orlando_sin_outliers = pd.read_csv('datos/orlando_cancel_sin_outliers.csv')
 df_cancelaciones_origen_miami_sin_outliers = pd.read_csv('datos/miami_cancel_sin_outliers.csv')
@@ -53,14 +46,39 @@ df_cancelaciones_origen_detroit = pd.read_csv('datos/cancelados_semana_origen_de
 df_cancelaciones_origen_losangeles = pd.read_csv('datos/cancelados_semana_clima_losangeles.csv')
 df_cancelaciones_clima_origen_orlando = pd.read_csv('datos/cancelados_semana_clima_orlando.csv')
 
-enum = [x for x in range(12*6*4 + 1)]
+# df_cancelados_semana_clima_deltaairlines = pd.read_csv('datos/cancelados_semana_clima_deltaairlines.csv')
+# df_delays_semana_clima_deltaairlines = pd.read_csv('datos/delays_semana_clima_deltaairlines.csv')
+# df_cancelados_semana_deltaairlines = pd.read_csv('datos/cancelados_semana_deltanairlines.csv')
+# df_cancelados_semana_expressjet = pd.read_csv('datos/cancelados_semana_expressjet.csv')
+# df_cancelados_semana_unitedairlines = pd.read_csv('datos/cancelados_semana_unitedairlines.csv')
+# df_cancelados_semana_atlanta_unitedairlines = pd.read_csv('datos/cancelados_semana_atlanta_unitedairlines.csv')
+
+# df_delays_semana_atlanta_unitedairlines = pd.read_csv('datos/delays_semana_atlanta_unitedairlines.csv')
+
+df_delays_semana_losangeles_unitedairlines = pd.read_csv('datos/delays_semana_losangeles_unitedairlines.csv')
+df_delays_semana_losangeles_expressjet = pd.read_csv('datos/delays_semana_losangeles_expressjet.csv')
+df_delays_semana_losangeles_deltaairlines = pd.read_csv('datos/delays_semana_losangeles_deltaairlines.csv')
+df_delays_semana_losangeles_americanairlines = pd.read_csv('datos/delays_semana_losangeles_americanairlines.csv')
+df_delays_semana_losangeles_southwestairlines = pd.read_csv('datos/delays_semana_losangeles_southwestairlines.csv')
+# df_delays_semana_expressjet = pd.read_csv('datos/delays_semana_expressjet.csv')
+
+df_cancelados_semana_americanairlines = pd.read_csv('datos/cancelados_semana_americanairlines.csv')
+# df_cancelados_semana_americanairlines_sinoutliers = pd.read_csv('datos/cancelados_semana_americanairlines_sinoutliers.csv')
+# df_delays_semana_americanairlines = pd.read_csv('datos/delays_semana_americanairlines.csv')
+
 rotacion_xaxis = 70
 rotacion_xaxis_years = 0
-espaciado = 24
-espaciado_years = 48
-labels = [str(year) + " - " + str(mes) for year in range(2003, 2009) for mes in listar_meses() for semana in range(4)]
-labels_years = [" "*24 + str(year) for year in range(2003, 2009) for mes in listar_meses() for semana in range(4)]
 
+pormes = 4
+espaciado = 6*pormes
+espaciado_years = 12*pormes
+
+enum = [x for x in range(12*6*pormes + 1)]
+
+labels = [str(year) + " - " + str(mes) for year in range(2003, 2009) for mes in listar_meses() for semana in range(pormes)]
+labels_years = [" "*24 + str(year) for year in range(2003, 2009) for mes in listar_meses() for semana in range(pormes)]
+
+# print(len(labels))
 
 def ajustar_ax(ax, xlabel='Semana', ylabel='Eventos por semana', legend=['Cancelaciones']):
     ax.set_xlabel(xlabel)
@@ -70,7 +88,7 @@ def ajustar_ax(ax, xlabel='Semana', ylabel='Eventos por semana', legend=['Cancel
     # ax.set_xticks(enum[::espaciado])
     # ax.set_xticklabels(labels[::espaciado], rotation=rotacion_xaxis)
 
-    #   Labels del estilo  "Año"
+    # #   Labels del estilo  "Año"
     ax.set_xticks(enum[::espaciado_years])
     ax.set_xticklabels(labels_years[::espaciado_years], rotation=rotacion_xaxis_years)
 
@@ -200,20 +218,20 @@ def calcularECM(df_prediccion):
 
 
 def sumar_year(k, cant):
-    return k + 12*4*cant
+    return k + 12*pormes*cant
 
 
 def restar_year(k, cant):
-    return k - 12*4*cant
+    return k - 12*pormes*cant
 
 
 def get_year(year):
-    return year*12*4
+    return year*pormes*12
 
 
 def predecir_cancelaciones(df, k):
     # Entreno 3 years hacia atras
-    rango_entrenamiento = list(range(restar_year(k, 2), k+1))
+    rango_entrenamiento = list(range(restar_year(k, 3), k+1))
     # Entreno 1 years hacia delante
     rango_prediccion = list(range(k, sumar_year(k, 1) + 1))
 
@@ -246,64 +264,33 @@ np.sin(np.pi/(3.0*4.0) * t),
 """
 
 
+"""
+Para delays_expressjet
+1
+np.cos(np.pi/(48.0*4.0) * t ),
+np.cos(np.pi/(12.0*4.0) * t ),
+np.cos(np.pi/(6.0*4.0) * t ),
+"""
+
 def armar_matriz_A(s):
     return np.array([
         [
             1,
-            # np.abs(np.sin(np.pi/(12.0*4.0)* t)),
-            # np.abs(np.cos(np.pi/(12.0*4.0)* t)),
-            # np.abs(np.sin(np.pi/(6.0*4.0) * t)),
-            # np.abs(np.cos(np.pi/(6.0*4.0) * t)),
-            # np.abs(np.sin(np.pi/(3.0*4.0) * t)),
-            # np.abs(np.cos(np.pi/(3.0*4.0) * t)),
-
+            t,
+            # np.log(t+1),
+            # t**2,
             # np.cos(np.pi/(12.0*4.0)*t)**8,
             # np.sin(np.pi/(6.0*4.0) * t),
             # np.sin(np.pi/(3.0*4.0) * t),
 
-            np.cos(np.pi/(12.0*4.0)*t)**8,
-            np.sin(np.pi/(6.0*4.0) * t),
-            np.sin(np.pi/(3.0*4.0) * t),
+            # np.cos(np.pi/(48.0*4.0) * t ),
+            # np.cos(np.pi/(12.0*4.0) * t ),
+
+            np.cos(np.pi/(24.0*4.0) * t ),
+            np.cos(np.pi/(6.0*4.0) * t ),
+            np.cos(np.pi/(3.0*4.0) * t ),
 
 
-            #np.sin(np.pi/(3.0*4.0)*t),
-            #np.sin(np.pi/(3.0*4.0)*t)
-            #np.sin(t)
-            #np.sin(np.pi/(12.0*4.0)*t),
-            #np.cos(np.pi/(12.0*4.0)*t),
-            #np.sin(np.pi/(6.0*4.0) * t),
-            #np.cos(np.pi/(6.0*4.0) * t),
-            #np.sin(np.pi/(3.0*4.0) * t),
-            #np.cos(np.pi/(3.0*4.0) * t),
-
-
-
-
-            # Estos estaban en el commit de lucas
-            # t,
-            # t**2,
-            # abs((np.cos(np.pi/(12.0*4) *(t-4*6)))**100),
-            # abs((np.sin(np.pi/(12.0*4) *(t-4*6)))**100),
-            # np.cos(np.pi/12.0 *t)**50,
-            # np.sin(np.pi/12.0 *t)**50,
-            # np.e**(-(((t-3)*4)**2)),
-            # np.sin(t)*np.cos(t),
-
-
-
-
-
-            #np.cos(t),
-            #np.sin(t),
-            #300*np.cos(t),
-            #300*np.sin(t),
-            #np.cos(np.pi *t),
-            #np.sin(np.pi *t),
-            #abs((np.cos(np.pi/12.0 *(t-3)))**4),
-            #abs((np.sin(np.pi/12.0 *(t-3)))**4),
-            #abs((np.cos(np.pi/6.0 *(t-3)))**4),
-            #abs((np.sin(np.pi/6.0 *(t-3))))**4,
-            #np.e
 
         ] for t in s])
 
@@ -312,7 +299,7 @@ def armar_matriz_A(s):
 def cuadrados_minimos(df, titulo='Cancelaciones por clima', ylabel='Cancelaciones por semana'):
     ax = preplot_cuadminimos(df, title=titulo, ylabel=ylabel, color=azul)
     # Predigo a partir del year 5
-    df_entrenamiento, df_prediccion = predecir_cancelaciones(df, get_year(5))
+    df_entrenamiento, df_prediccion = predecir_cancelaciones(df, get_year(4))
 
     # Grafico predicciones y aproximacino
     sns.tsplot(ax=ax, time=df_entrenamiento['x'], data=df_entrenamiento['pred'], color='red', legend=True)
@@ -322,17 +309,25 @@ def cuadrados_minimos(df, titulo='Cancelaciones por clima', ylabel='Cancelacione
 
     print("ECM: " + str(calcularECM(df_prediccion)))
 
-    plt.xlim((0, get_year(6) + 5))
+    plt.xlim((0, get_year(6)))
     plt.show()
 
 
-
-# plot_cancelados_clima_gral()
-# cuadrados_minimos(df_cancelaciones_clima_semana)
-
-# plot_cancelaciones_clima_miami()
-# plot_cancelaciones_clima_orlando()
 # cuadrados_minimos(df_cancelaciones_clima_orig_miami, titulo='Cancelaciones por clima - Miami')
 # cuadrados_minimos(df_cancelaciones_clima_orig_miami_sinouts, titulo='Cancelaciones por clima - Miami (Sin outliers)')
-cuadrados_minimos(df_cancelaciones_origen_losangeles, titulo='Cancelaciones por clima - Los Ángeles')
+# cuadrados_minimos(df_cancelaciones_origen_losangeles, titulo='Cancelaciones por clima - Los Ángeles')
 # cuadrados_minimos(df_cancelaciones_clima_origen_orlando, titulo='Cancelaciones por clima - Orlando')
+
+
+# cuadrados_minimos(df_cancelados_semana_unitedairlines, titulo='Cancelaciones - United Airlines')
+# cuadrados_minimos(df_cancelados_semana_atlanta_unitedairlines, titulo='Cancelaciones - Atlanta - United Airlines')
+# cuadrados_minimos(df_delays_semana_atlanta_unitedairlines, titulo='Retrasos - Atlanta - United Airlines', ylabel='Retrasos por semana')
+# cuadrados_minimos(df_cancelados_semana_expressjet, titulo='Cancelaciones - Express Jet')
+# cuadrados_minimos(df_cancelados_semana_deltaairlines, titulo='Cancelaciones - Delta Airlines')
+# cuadrados_minimos(df_cancelados_semana_americanairlines, titulo='Cancelaciones - American Airlines')
+
+
+cuadrados_minimos(df_delays_semana_losangeles_unitedairlines, titulo='Retrasos - Los Angeles - United Airlines', ylabel='Retrasos por semana')
+cuadrados_minimos(df_delays_semana_losangeles_deltaairlines, titulo='Retrasos - Los Angeles - Delta Airlines', ylabel='Retrasos por semana')
+cuadrados_minimos(df_delays_semana_losangeles_americanairlines, titulo='Retrasos - Los Angeles - American Airlines', ylabel='Retrasos por semana')
+cuadrados_minimos(df_delays_semana_losangeles_southwestairlines, titulo='Retrasos - Los Angeles - SouthWest Airlines', ylabel='Retrasos por semana')

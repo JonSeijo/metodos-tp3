@@ -85,5 +85,6 @@ for year in `seq 2003 2008`; do
 	# done;
 
 	# rm canc_aux.csv
-
 done;
+
+mv $outfile "../experimentos/datos/"$outfile
