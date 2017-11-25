@@ -120,68 +120,278 @@
 %----------------------------------------------------------------------------------------
 
 %------------------------------------------------
-\section{Introducción} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+% \section{Introducción} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
 %------------------------------------------------
 
 
-\subsection{Introducción} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
+% -----------------------------------
 
 \begin{frame}
-% \frametitle{TO DO LIST}
 
-% \todo[inline]{Introduccion ?}
-\todo[inline]{Como tomamos los datos, que usamos para implementar (python etc). me dijo fran que lo mencionaramos}
-\todo[inline]{Division de datos en semanas}
 
-\todo[inline]{Primer eje, explicacion}
-\todo[inline]{Mostrar grafico de cancelaciones sin prediccion}
-\todo[inline]{Intuicion de que funcion elegir. Periodos de cosenos son las semanas, etc}
-\todo[inline]{Resultados}
-\todo[inline]{Que pasa si filtramos por aropuerto (Miami + el otro)}
-\todo[inline]{Conclusion}
+% Hicimos scripts en bash para filtrar los datos,
+% por ejemplo podiamos filtrar todos los vuelos de tal aerolinea,
+%         que salieron del aeropuerto tal, que se cancelo por tal
+% Hacer estos scripts de forma generica nos permitio que no nos tengamos que preocupar en pensar como filtrar los datos cada vez, bla
 
-\todo[inline]{Segundo eje, explicacion}
-\todo[inline]{Por que filtramos por aeropuerto}
-\todo[inline]{Funciones de pred, resultados}
-\todo[inline]{Algo mas quiza?}
-\todo[inline]{Conclusion}
 
-\todo[inline]{Preguntas}
+% Usamos python porque era sencillo, ya lo veniamos usando en otros tps. bla bla python esta re bueno because reasons
 
+% Nos aseguramos que la libreria dijera explicitamente que usaba cuadrados minimos
+%                           "Ordinary least squares Linear Regression"
+% La utilizamos tanto para la aproximacion como por la prediccion, dar credito a la clase de francisco
+
+\frametitle{Sobre los datos}
+\begin{itemize}
+    \item{Filtrar datos por categorías: Scripting - bash}
+    \item{Carga y organización de datos: Python - Pandas}
+    \item{Predicciones con cuadrados mínimos: Python - sklearn.linear\_model}
+\end{itemize}
+
+\end{frame}
+
+
+% -----------------------------------
+
+\begin{frame}
+
+% Cuando empezamos a experimentar notamos que los datos previos a 2003 no nos eran utiles.
+%   [como vamos a ver despues] si queremos analizar cancelaciones especificamente por clime
+%       ni siquiera existen registros sobre ello previo a 2003
+% En otras categorias, existen datos pre2003 pero siguen patrones muy diferentes que no nos sirven. bla
+
+% Probamos agrupar los datos en meses en un principio, pero haba extrema variacion.
+% Una posibilidad era dividir en dias pero no aportaba info. blabla. lo mejor era en semanas
+
+% Para poder elegir cual era en cada caso la mejor familia de funciones aplicamos cross validation
+%    y nos quedamos con la que promediaba mejor error cuadratico medio
+%  por ej, tomamos 3 años y predecimos 1, y vamos corriendo esa ventana hacia adelante
+
+
+\frametitle{Sobre la experimentación}
+\begin{itemize}
+    \item{Uso de datos desde 2003.}
+    \item{División de los datos en semanas.}
+    \item{Aplicación de Cross Validation.}
+\end{itemize}
+
+\end{frame}
+
+
+% -----------------------------------
+
+
+
+\begin{frame}
+
+% Explicar el eje, ver informe, no hay mucho mas
+% Desarrollar un poco ante cada pregunta
+
+\frametitle{Cancelaciones por clima}
+
+\begin{itemize}
+    \item{¿Cómo varían las cancelaciones por clima a través del tiempo?}
+    \item{¿Cómo influye el aeropuerto de origen?}
+    \item{¿Se sigue un patrón regular?}
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------
+
+
+\begin{frame}
+
+% Explicar el grafico, ver informe
+
+% Basicamente:
+% - picos enero y diciembre por invierno y/o caudal de gente
+% - Huracanes charley, Katrina
+% - Apagon por altas temperaturas
+
+\frametitle{Cancelaciones por clima - General}
+
+\todo[inline]{Insertar grafico de cancelaciones generales por clima}
+
+\end{frame}
+
+% -----------------------------------
+
+
+\begin{frame}
+
+% Por que senos y cosenos, hablar de la periodicidad
+% Vemos que un periodo se repite cada año (48 semanas)
+% Queremos tener en cuenta periodos semestrales
+% La familia que utilizamos fue esta porque bla (lo explicado antes)
+% Contar lo de la elevacion a la potencia
+
+% No hay mucho mas que decir
+
+\frametitle{Familia de funciones}
+
+\todo[inline]{Explicar la idea antes de mostrar la funcion final}
+\pause
+\todo[inline]{Insertar funcion completa}
+
+\end{frame}
+
+% -----------------------------------
+
+
+\begin{frame}
+
+\frametitle{Resultados - General}
+
+% Las cosas no fueron exactas blabla contar el grafico
+
+\todo[inline]{Insertar grafico de predicciones con cuadrados minimos}
 
 \end{frame}
 
 % -----------------------------------
 
 \begin{frame}
-\frametitle{Ejemplo del comando \textbackslash item}
+
+\frametitle{Resultados - Por aeropuerto}
+
+% Como lo anterior podia tener mucho "ruido" de muchos aeropuertos, nos especializamos en dos.
+% Ver informe por razones de eleccion, etc
+
+% IMPORTANTE: CONCLUIR ALGO
+\todo[inline]{Insertar grafico de predicciones con cuadrados minimos - Miami y/o los angeles}
+
+% Francisco me tiro la idea que podemos mostrar miami con/sin outliers para mostrar la diferencia
+
+\end{frame}
+
+% -----------------------------------
+
+\begin{frame}
+
+% Explicar el eje, ver informe, no hay mucho mas
+% Desarrollar un poco ante cada pregunta
+
+\frametitle{Aerolíneas}
 
 \begin{itemize}
-    \item<1-> {Para llegar a la solución tenemos que probar diferentes posibilidades.}
-    \item<2-> {Una forma de encarar el problema es pensar en las decisiones que pude haber tomado para llegar a mi posición actual.}
-    \item<3-> {En nuestro caso, si estoy parado en una cierta casilla \textbf{solamente} pude haber llegado desde la casilla de \textbf{arriba} o desde la \textbf{izquierda}.}
-    \item<4> {\textit{Cuidado con los bordes}. Por ejemplo, si estamos en el borde izquierdo solo pudimos venir desde arriba. Ignoremos los casos borde por unos momentos}
-
+    \item{¿Cómo se comporta nuestro modelo con la cantidad de retrasos por aerolíneas?}
+    \item{¿Es posible predecir alguna mejor que otra?}
+    \item{¿Será necesario adaptar la familia de funciones cada vez?}
 \end{itemize}
 
 \end{frame}
 
-% ------------------------------
+% -----------------------------------
 
 \begin{frame}
-\frametitle{Ejemplo del comando pause}
 
-% Con la observación en mente, ya sabemos como se relacionan las casillas en un camino mínimo. \\
-% \pause
-Queremos encontrar el peso del camino mínimo que va desde (1,1) hasta (m,n). Pongámosle nombre a lo que buscamos.\\
-\pause
-\begin{block}{Definición}
-f(i, j) = Peso del camino mínimo que va desde (1,1) hasta (i,j).
-\end{block}
-\pause
-$ $\newline
-La solución a nuestro problema es f(m, n).
+% Fijamos aeropuertos por la gran variacion, elegimos los mas grandes por razones
+% Consideramos que un retraso es tal cosa
+% Basicamente el preliminar del informe, ver eso
+
+\frametitle{Aerolíneas - Intro}
+
+\begin{itemize}
+    \item{Aeropuertos fijos.}
+    \item{Elección de aeropuertos y aerolíneas.}
+    \item{Clasificación de retrasos.}
+\end{itemize}
+
 \end{frame}
+
+
+% -----------------------------------
+
+\begin{frame}
+
+% Explicar la familia de funciones, simil informe
+
+\frametitle{United Airlines - Funciones}
+
+\todo[inline]{Insertar familia de funciones usada}
+
+\end{frame}
+
+
+% -----------------------------------
+
+\begin{frame}
+
+% Explicar los graficos
+% Conclusiones sobre ellos
+% IMPORTANTE: La misma funcion minimiza distintos aeropuertos, patrones se repiten
+% ver informe
+
+\frametitle{United Airlines - Resultados}
+
+\todo[inline]{Insertar gráficos de Los Angeles y/o Atlanta - UNITED AIRLINES}
+
+\end{frame}
+
+% -----------------------------------
+
+\begin{frame}
+
+% Explicar los graficos
+% Conclusiones sobre ellos
+% IMPORTANTE: La misma funcion minimiza distintos aeropuertos, patrones se repiten
+% ver informe
+
+\frametitle{American Airlines}
+
+\todo[inline]{Insertar gráficos de Los Angeles y/o Atlanta - ATLANTA}
+
+\end{frame}
+
+% -----------------------------------
+
+\begin{frame}
+
+\frametitle{Conclusiones}
+
+% Conclusiones finales sobre el eje, ver informe
+
+\begin{itemize}
+    \item{Periodicidad.}
+    \item{Patrones generales.}
+    \item{Uso de la misma familia de funciones.}
+\end{itemize}
+
+
+\end{frame}
+
+
+
+% \begin{frame}
+% \frametitle{Ejemplo del comando \textbackslash item}
+
+% \begin{itemize}
+%     \item<1-> {Para llegar a la solución tenemos que probar diferentes posibilidades.}
+%     \item<2-> {Una forma de encarar el problema es pensar en las decisiones que pude haber tomado para llegar a mi posición actual.}
+%     \item<3-> {En nuestro caso, si estoy parado en una cierta casilla \textbf{solamente} pude haber llegado desde la casilla de \textbf{arriba} o desde la \textbf{izquierda}.}
+%     \item<4> {\textit{Cuidado con los bordes}. Por ejemplo, si estamos en el borde izquierdo solo pudimos venir desde arriba. Ignoremos los casos borde por unos momentos}
+
+% \end{itemize}
+
+% \end{frame}
+
+% % ------------------------------
+
+% \begin{frame}
+% \frametitle{Ejemplo del comando pause}
+
+% % Con la observación en mente, ya sabemos como se relacionan las casillas en un camino mínimo. \\
+% % \pause
+% Queremos encontrar el peso del camino mínimo que va desde (1,1) hasta (m,n). Pongámosle nombre a lo que buscamos.\\
+% \pause
+% \begin{block}{Definición}
+% f(i, j) = Peso del camino mínimo que va desde (1,1) hasta (i,j).
+% \end{block}
+% \pause
+% $ $\newline
+% La solución a nuestro problema es f(m, n).
+% \end{frame}
 
 
 
