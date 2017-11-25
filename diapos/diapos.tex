@@ -211,7 +211,9 @@
 
 \frametitle{Cancelaciones por clima - General}
 
-\todo[inline]{Insertar grafico de cancelaciones generales por clima}
+{\centering
+\includegraphics[scale=0.62]{diapos/imagenes/cancelacionesClimaGeneralPlotV1.pdf}
+}
 
 \end{frame}
 
@@ -230,9 +232,11 @@
 
 \frametitle{Familia de funciones}
 
-\todo[inline]{Explicar la idea antes de mostrar la funcion final}
 \pause
-\todo[inline]{Insertar funcion completa}
+
+% \begin{align}
+$$f(t) = \alpha_1 + \alpha_2 * cos(\frac{2\pi}{48} t)^{8} + \alpha_3 * sen(\frac{2\pi}{24} t) + \alpha_4 * sen(\frac{2\pi}{12} t)$$
+% \end{align}
 
 \end{frame}
 
@@ -245,7 +249,10 @@
 
 % Las cosas no fueron exactas blabla contar el grafico
 
-\todo[inline]{Insertar grafico de predicciones con cuadrados minimos}
+{\centering
+\includegraphics[scale=0.62]{diapos/imagenes/cancelacionesPorClimaGeneralPrediccionV1.pdf}
+}
+
 
 \end{frame}
 
@@ -253,15 +260,34 @@
 
 \begin{frame}
 
-\frametitle{Resultados - Por aeropuerto}
+\frametitle{Resultados - Miami outliers}
+
+% Como lo anterior podia tener mucho "ruido" de muchos aeropuertos, nos especializamos en dos.
+% Ver informe por razones de eleccion, etc
+
+% Francisco me tiro la idea que podemos mostrar miami con/sin outliers para mostrar la diferencia
+
+\todo[inline]{Quiza no valga la pena mostrar lo de los outliers}
+{\centering
+\includegraphics[scale=0.62]{diapos/imagenes/cancelacionesClimaMiamiPrediccionCONOUTS.pdf}
+}
+
+\end{frame}
+
+% -----------------------------------
+
+\begin{frame}
+
+\frametitle{Resultados - Miami y Los Ángeles}
 
 % Como lo anterior podia tener mucho "ruido" de muchos aeropuertos, nos especializamos en dos.
 % Ver informe por razones de eleccion, etc
 
 % IMPORTANTE: CONCLUIR ALGO
-\todo[inline]{Insertar grafico de predicciones con cuadrados minimos - Miami y/o los angeles}
-
-% Francisco me tiro la idea que podemos mostrar miami con/sin outliers para mostrar la diferencia
+{\centering
+\includegraphics[scale=0.5]{diapos/imagenes/cancelacionesClimaMiamiPrediccionV1SINOUTS.pdf}
+\includegraphics[scale=0.5]{diapos/imagenes/cancelacionesClimaLosAngelesPrediccionV1.pdf}
+}
 
 \end{frame}
 
@@ -309,10 +335,59 @@
 
 \frametitle{United Airlines - Funciones}
 
-\todo[inline]{Insertar familia de funciones usada}
+$$ f(t) = \alpha_1 + \alpha_2 * t + \alpha_3 * cos(\frac{2\pi}{48} t) + \alpha_4 * cos(\frac{2\pi}{24} t) + \alpha_5 * cos(\frac{2\pi}{12} t) $$
 
 \end{frame}
 
+
+% -----------------------------------
+
+\begin{frame}
+
+% Explicar los graficos
+
+
+\frametitle{United Airlines - Los Ángeles}
+
+{\centering
+  \includegraphics[width=1.0\linewidth]{diapos/imagenes/retrasosUnitedAirlinesLAvol3.pdf}
+}
+
+\end{frame}
+
+% -----------------------------------
+
+\begin{frame}
+
+% Explicar los graficos
+
+\frametitle{United Airlines - Atlanta}
+
+{\centering
+  \includegraphics[width=1.0\linewidth]{diapos/imagenes/retrasosUnitedAirlinesATLvol3.pdf}
+}
+
+\end{frame}
+
+% -----------------------------------
+
+\begin{frame}
+
+% Conclusiones sobre los graficos anteriores
+% IMPORTANTE: La misma funcion minimiza distintos aeropuertos, patrones se repiten
+% ver informe
+
+\frametitle{United Airlines - Analisis}
+
+\begin{itemize}
+
+\item{Funciones periódicas consiguieron el mínimo.}
+\item{Misma familia minimizó varios aeropuertos.}
+\item{Queremos ver si este comportamiento se repite en otra aerolínea.}
+
+\end{itemize}
+
+\end{frame}
 
 % -----------------------------------
 
@@ -323,9 +398,11 @@
 % IMPORTANTE: La misma funcion minimiza distintos aeropuertos, patrones se repiten
 % ver informe
 
-\frametitle{United Airlines - Resultados}
+\frametitle{American Airlines - Los Ángeles}
 
-\todo[inline]{Insertar gráficos de Los Angeles y/o Atlanta - UNITED AIRLINES}
+{\centering
+  \includegraphics[width=1.0\linewidth]{diapos/imagenes/retrasosAmericanAirlinesLAvol3.pdf}
+}
 
 \end{frame}
 
@@ -338,9 +415,11 @@
 % IMPORTANTE: La misma funcion minimiza distintos aeropuertos, patrones se repiten
 % ver informe
 
-\frametitle{American Airlines}
+\frametitle{American Airlines - Atlanta}
 
-\todo[inline]{Insertar gráficos de Los Angeles y/o Atlanta - ATLANTA}
+{\centering
+  \includegraphics[width=1.0\linewidth]{diapos/imagenes/retrasosAmericanAirlinesATLvol3.pdf}
+}
 
 \end{frame}
 
