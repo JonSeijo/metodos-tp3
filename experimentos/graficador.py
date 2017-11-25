@@ -312,6 +312,7 @@ def armar_matriz_A(s):
 
             # UNITED AIRLINES
             t,
+            np.cos(np.pi/(24.0*4.0)* t),
             np.cos(np.pi/(12.0*4.0)* t),
             np.cos(np.pi/(6.0*4.0) * t),
             np.cos(np.pi/(3.0*4.0) * t),
